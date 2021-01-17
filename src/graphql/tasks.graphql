@@ -1,0 +1,29 @@
+query TaskFeed(
+    $taskOrderInput: [TaskOrderByInput!],
+    $taskWhereInput: TaskWhereInput
+) {
+    tasks(
+        orderBy: $taskOrderInput,
+        where: $taskWhereInput
+    ) {
+        id
+        name
+        content
+        createdAt
+        updatedAt
+        labels {
+            id
+            name
+            createdAt
+        }
+        userId
+        user {
+            id
+            email
+            name
+            password
+            createdAt
+            role
+        }
+    }
+}
