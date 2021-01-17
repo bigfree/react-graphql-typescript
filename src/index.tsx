@@ -7,14 +7,13 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 const httpLink = createHttpLink({
-	uri: 'http://localhost:4000',
+	uri: process.env.REACT_APP_GRAPHQL_API,
 });
 
 const authLink = setContext((_, { headers }) => {
 	// get the authentication token from local storage if it exists
 	// const token = localStorage.getItem('token');
-	const token =
-		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJja2J1ejFkN2MwMDAwbmt2Nno4Yjl2cGF2IiwiaWF0IjoxNjA1OTgzOTIxfQ.7BwB3r2O9UFTYCE-1wN-l7sLjBjjJcDSvuuSsT1yty8';
+	const token = process.env.REACT_APP_SACRED_TOKEN;
 	// return the headers to the context so httpLink can read them
 	return {
 		headers: {
