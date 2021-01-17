@@ -1,5 +1,9 @@
 {
   "name": "react-graphql-typescript",
+  "author": {
+    "name": "Adam Mikó",
+    "email": "okukster@gmail.com"
+  },
   "version": "0.1.0",
   "private": true,
   "dependencies": {
