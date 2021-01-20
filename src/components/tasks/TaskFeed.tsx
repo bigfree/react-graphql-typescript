@@ -4,7 +4,6 @@ import React from 'react';
 import { match } from "react-router-dom";
 import {
 	IQueryMode,
-	ISortOrder,
 	ITask,
 	ITaskOrderByInput,
 	ITaskWhereInput,
@@ -68,7 +67,7 @@ const TaskFeed: React.FC<TProps> = ({ match, dataFilter }: TProps): JSX.Element 
 	 * @type {{createdAt: ISortOrder}}
 	 */
 	const taskOrderInput: ITaskOrderByInput = {
-		createdAt: ISortOrder.Desc
+		createdAt: dataFilter.taskOrder
 	}
 
 	/**

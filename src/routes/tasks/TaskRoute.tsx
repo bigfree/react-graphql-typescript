@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { match } from "react-router-dom";
 import TaskFeed from "../../components/tasks/TaskFeed";
 import TaskFeedFilter from "../../components/tasks/TaskFeedFilter";
+import { ISortOrder } from "../../generated/graphql";
 import { TDataFilter } from "../../types/Task.types";
 
 type TProps = {
@@ -22,6 +23,7 @@ const TaskRoute: React.FC<TProps> = ({ match }: TProps): JSX.Element => {
 		taskName: '',
 		taskCreatedAt: null,
 		taskCreatedAtEnd: null,
+		taskOrder: ISortOrder.Desc,
 	});
 
 	const handleDataChange = (data: TDataFilter) => {
