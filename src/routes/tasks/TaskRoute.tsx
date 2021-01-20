@@ -1,4 +1,4 @@
-import { Container, makeStyles, Theme } from "@material-ui/core";
+import { Box, makeStyles } from "@material-ui/core";
 import { endOfDay, formatISO, parseISO } from "date-fns";
 import React, { useState } from 'react';
 import { match } from "react-router-dom";
@@ -11,9 +11,12 @@ type TProps = {
 	match: match
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
 	root: {
-		paddingTop: theme.spacing(3),
+		// padding: theme.spacing(3),
+		padding: 0,
+		display: 'flex',
+		flexDirection: 'column',
 	},
 }));
 
@@ -34,10 +37,10 @@ const TaskRoute: React.FC<TProps> = ({ match }: TProps): JSX.Element => {
 	}
 
 	return (
-		<Container maxWidth="lg" className={styles.root}>
+		<Box className={styles.root}>
 			<TaskFeedFilter dataFilter={dataFilter} handleDataChange={handleDataChange}/>
 			<TaskFeed match={match} dataFilter={dataFilter}/>
-		</Container>
+		</Box>
 	)
 }
 

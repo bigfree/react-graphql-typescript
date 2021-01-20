@@ -4,6 +4,7 @@ import { indigo, pink } from '@material-ui/core/colors';
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import sk from 'date-fns/locale/sk';
 import React from 'react';
+import AsideDrawer from "./components/aside/SiteAsideMenu";
 
 import SiteContent from "./components/content/SiteContent";
 import Navbar from "./components/navbar/Navbar";
@@ -30,20 +31,6 @@ const useStyles = makeStyles(() => ({
 
 const App: React.FC = (): JSX.Element => {
 	const styles = useStyles();
-	// const [message, setMessage] = useState<string>('');
-	// const { data, loading, error } = useTaskFeedQuery();
-	//
-	// /**
-	//  * @param {React.ChangeEvent<HTMLInputElement>} event
-	//  */
-	// const handleTextChange = (event: ChangeEvent<HTMLInputElement>): void => {
-	// 	setMessage(event.target.value);
-	// };
-	//
-	// if (loading) return <p>Loading..</p>;
-	// if (error) return <p>Error..</p>;
-	//
-	// console.log(data);
 
 	return (
 		<MuiPickersUtilsProvider utils={DateFnsUtils} locale={sk}>
@@ -51,8 +38,8 @@ const App: React.FC = (): JSX.Element => {
 				<Box className={styles.root}>
 					<CssBaseline/>
 					<Navbar/>
+					<AsideDrawer/>
 					<SiteContent/>
-					{/*<TaskFeed/>*/}
 				</Box>
 			</ThemeProvider>
 		</MuiPickersUtilsProvider>

@@ -1,14 +1,7 @@
-import { List, makeStyles, Paper } from "@material-ui/core";
-import Skeleton from '@material-ui/lab/Skeleton';
+import { Box, List, makeStyles, Paper, Theme } from "@material-ui/core";
 import React from 'react';
 import { match } from "react-router-dom";
-import {
-	IQueryMode,
-	ITask,
-	ITaskOrderByInput,
-	ITaskWhereInput,
-	useTaskFeedQuery
-} from "../../generated/graphql";
+import { IQueryMode, ITask, ITaskOrderByInput, ITaskWhereInput, useTaskFeedQuery } from "../../generated/graphql";
 import { TDataFilter } from "../../types/Task.types";
 import TaskRow from "./TaskRow";
 
@@ -17,7 +10,11 @@ type TProps = {
 	dataFilter: TDataFilter;
 }
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme: Theme) => ({
+	root: {
+		flexGrow: 1,
+		padding: theme.spacing(0, 2, 2, 2),
+	},
 	paper: {
 		width: '100%',
 	},
@@ -80,20 +77,20 @@ const TaskFeed: React.FC<TProps> = ({ match, dataFilter }: TProps): JSX.Element 
 		}
 	});
 
-	if (loading) return <Paper className={styles.paperLoading}>
-		<Skeleton animation={`wave`} variant={`rect`} className={styles.skeleton}/>
-	</Paper>;
+	if (loading) return <p>Loading..</p>;
 
 	if (error) return <p>Error..</p>;
 
 	return (
-		<Paper className={styles.paper}>
-			<List className={styles.list}>
-				{data?.tasks.map((task: ITask) => (
-					<TaskRow key={task.id} task={task} match={match}/>
-				))}
-			</List>
-		</Paper>
+		<Box className={styles.root}>
+			<Paper className={styles.paper}>
+				<List className={styles.list}>
+					{data?.tasks.map((task: ITask) => (
+						<TaskRow key={task.id} task={task} match={match}/>
+					))}
+				</List>
+			</Paper>
+		</Box>
 	)
 };
 

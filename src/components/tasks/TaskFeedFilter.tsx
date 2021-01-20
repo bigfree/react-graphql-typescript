@@ -1,15 +1,4 @@
-import {
-	Box,
-	FormControl,
-	Grid,
-	InputLabel,
-	makeStyles,
-	MenuItem,
-	Paper,
-	Select,
-	TextField,
-	Theme
-} from "@material-ui/core";
+import { Box, FormControl, Grid, InputLabel, makeStyles, MenuItem, Select, TextField, Theme } from "@material-ui/core";
 import { KeyboardDatePicker } from "@material-ui/pickers";
 import { formatISO, startOfDay } from 'date-fns';
 import React, { ChangeEvent } from 'react';
@@ -31,10 +20,10 @@ type TFormData = {
 
 const useStyles = makeStyles((theme: Theme) => ({
 	root: {
-		marginBottom: theme.spacing(2),
-	},
-	paper: {
+		flexGrow: 1,
 		padding: theme.spacing(2),
+		marginBottom: theme.spacing(2),
+		borderBottom: `1px solid ${theme.palette.divider}`,
 	},
 	nameFilter: {
 		flex: 1,
@@ -87,65 +76,63 @@ const TaskFeedFilter: React.FC<TProps> = ({ dataFilter, handleDataChange }: TPro
 	return (
 		<Box className={styles.root}>
 			<form onSubmit={handleSubmit(onSubmit)} autoComplete={"off"}>
-				<Paper className={styles.paper}>
-					<Grid container>
-						<Controller
-							name={`taskName`}
-							control={control}
-							defaultValue={dataFilter.taskName}
-							render={({ onChange, value }) =>
-								<TextField
-									variant={`outlined`}
+				<Grid container>
+					<Controller
+						name={`taskName`}
+						control={control}
+						defaultValue={dataFilter.taskName}
+						render={({ onChange, value }) =>
+							<TextField
+								variant={`outlined`}
+								value={value}
+								onChange={onChange}
+								onKeyUp={onInput}
+								label={`Task name`}
+								className={styles.nameFilter}
+							/>
+						}
+					/>
+					<Controller
+						name={`taskCreatedAt`}
+						control={control}
+						defaultValue={dataFilter.taskCreatedAt}
+						rules={{
+							required: false,
+						}}
+						render={({ value }) =>
+							<KeyboardDatePicker
+								disableToolbar
+								variant={`inline`}
+								inputVariant={`outlined`}
+								format={`dd.MM.yyyy`}
+								value={value ?? null}
+								onChange={onDateChange}
+								label={`Created At`}
+								className={styles.createdAtElement}
+							/>
+						}
+					/>
+					<Controller
+						name={`taskOrder`}
+						control={control}
+						defaultValue={dataFilter.taskOrder}
+						render={({ value }) =>
+							<FormControl variant={`outlined`} className={styles.orderElement}>
+								<InputLabel id={`order-select-label`} defaultValue={value}>Order</InputLabel>
+								<Select
+									labelId={`order-select-label`}
+									label={`Order`}
+									id={`order-select`}
 									value={value}
-									onChange={onChange}
-									onKeyUp={onInput}
-									label={`Task name`}
-									className={styles.nameFilter}
-								/>
-							}
-						/>
-						<Controller
-							name={`taskCreatedAt`}
-							control={control}
-							defaultValue={dataFilter.taskCreatedAt}
-							rules={{
-								required: false,
-							}}
-							render={({ value }) =>
-								<KeyboardDatePicker
-									disableToolbar
-									variant={`inline`}
-									inputVariant={`outlined`}
-									format={`dd.MM.yyyy`}
-									value={value ?? null}
-									onChange={onDateChange}
-									label={`Created At`}
-									className={styles.createdAtElement}
-								/>
-							}
-						/>
-						<Controller
-							name={`taskOrder`}
-							control={control}
-							defaultValue={dataFilter.taskOrder}
-							render={({ value }) =>
-								<FormControl variant={`outlined`} className={styles.orderElement}>
-									<InputLabel id={`order-select-label`} defaultValue={value}>Order</InputLabel>
-									<Select
-										labelId={`order-select-label`}
-										label={`Order`}
-										id={`order-select`}
-										value={value}
-										onChange={onOrderChange}
-									>
-										<MenuItem value={ISortOrder.Desc}>Latest</MenuItem>
-										<MenuItem value={ISortOrder.Asc}>Oldest</MenuItem>
-									</Select>
-								</FormControl>
-							}
-						/>
-					</Grid>
-				</Paper>
+									onChange={onOrderChange}
+								>
+									<MenuItem value={ISortOrder.Desc}>Latest</MenuItem>
+									<MenuItem value={ISortOrder.Asc}>Oldest</MenuItem>
+								</Select>
+							</FormControl>
+						}
+					/>
+				</Grid>
 			</form>
 		</Box>
 	)
