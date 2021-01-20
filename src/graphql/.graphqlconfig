@@ -9,7 +9,7 @@
           "user-agent": "JS GraphQL",
           "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJja2J1ejFkN2MwMDAwbmt2Nno4Yjl2cGF2IiwiaWF0IjoxNjA1OTgzOTIxfQ.7BwB3r2O9UFTYCE-1wN-l7sLjBjjJcDSvuuSsT1yty8"
         },
-        "introspect": false
+        "introspect": true
       }
     }
   }

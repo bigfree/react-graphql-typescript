@@ -51,7 +51,7 @@ export type IQueryFindFirstLabelArgs = {
   cursor?: Maybe<ILabelWhereUniqueInput>;
   take?: Maybe<Scalars['Int']>;
   skip?: Maybe<Scalars['Int']>;
-  distinct?: Maybe<Array<ILabelDistinctFieldEnum>>;
+  distinct?: Maybe<Array<ILabelScalarFieldEnum>>;
 };
 
 
@@ -61,7 +61,7 @@ export type IQueryLabelsArgs = {
   cursor?: Maybe<ILabelWhereUniqueInput>;
   take?: Maybe<Scalars['Int']>;
   skip?: Maybe<Scalars['Int']>;
-  distinct?: Maybe<Array<ILabelDistinctFieldEnum>>;
+  distinct?: Maybe<Array<ILabelScalarFieldEnum>>;
 };
 
 
@@ -71,7 +71,6 @@ export type IQueryAggregateLabelArgs = {
   cursor?: Maybe<ILabelWhereUniqueInput>;
   take?: Maybe<Scalars['Int']>;
   skip?: Maybe<Scalars['Int']>;
-  distinct?: Maybe<Array<ILabelDistinctFieldEnum>>;
 };
 
 
@@ -86,7 +85,7 @@ export type IQueryFindFirstProjectArgs = {
   cursor?: Maybe<IProjectWhereUniqueInput>;
   take?: Maybe<Scalars['Int']>;
   skip?: Maybe<Scalars['Int']>;
-  distinct?: Maybe<Array<IProjectDistinctFieldEnum>>;
+  distinct?: Maybe<Array<IProjectScalarFieldEnum>>;
 };
 
 
@@ -96,7 +95,7 @@ export type IQueryProjectsArgs = {
   cursor?: Maybe<IProjectWhereUniqueInput>;
   take?: Maybe<Scalars['Int']>;
   skip?: Maybe<Scalars['Int']>;
-  distinct?: Maybe<Array<IProjectDistinctFieldEnum>>;
+  distinct?: Maybe<Array<IProjectScalarFieldEnum>>;
 };
 
 
@@ -106,7 +105,6 @@ export type IQueryAggregateProjectArgs = {
   cursor?: Maybe<IProjectWhereUniqueInput>;
   take?: Maybe<Scalars['Int']>;
   skip?: Maybe<Scalars['Int']>;
-  distinct?: Maybe<Array<IProjectDistinctFieldEnum>>;
 };
 
 
@@ -121,7 +119,7 @@ export type IQueryFindFirstTaskArgs = {
   cursor?: Maybe<ITaskWhereUniqueInput>;
   take?: Maybe<Scalars['Int']>;
   skip?: Maybe<Scalars['Int']>;
-  distinct?: Maybe<Array<ITaskDistinctFieldEnum>>;
+  distinct?: Maybe<Array<ITaskScalarFieldEnum>>;
 };
 
 
@@ -131,7 +129,7 @@ export type IQueryTasksArgs = {
   cursor?: Maybe<ITaskWhereUniqueInput>;
   take?: Maybe<Scalars['Int']>;
   skip?: Maybe<Scalars['Int']>;
-  distinct?: Maybe<Array<ITaskDistinctFieldEnum>>;
+  distinct?: Maybe<Array<ITaskScalarFieldEnum>>;
 };
 
 
@@ -141,7 +139,6 @@ export type IQueryAggregateTaskArgs = {
   cursor?: Maybe<ITaskWhereUniqueInput>;
   take?: Maybe<Scalars['Int']>;
   skip?: Maybe<Scalars['Int']>;
-  distinct?: Maybe<Array<ITaskDistinctFieldEnum>>;
 };
 
 
@@ -156,7 +153,7 @@ export type IQueryFindFirstUserArgs = {
   cursor?: Maybe<IUserWhereUniqueInput>;
   take?: Maybe<Scalars['Int']>;
   skip?: Maybe<Scalars['Int']>;
-  distinct?: Maybe<Array<IUserDistinctFieldEnum>>;
+  distinct?: Maybe<Array<IUserScalarFieldEnum>>;
 };
 
 
@@ -166,7 +163,7 @@ export type IQueryUsersArgs = {
   cursor?: Maybe<IUserWhereUniqueInput>;
   take?: Maybe<Scalars['Int']>;
   skip?: Maybe<Scalars['Int']>;
-  distinct?: Maybe<Array<IUserDistinctFieldEnum>>;
+  distinct?: Maybe<Array<IUserScalarFieldEnum>>;
 };
 
 
@@ -176,7 +173,6 @@ export type IQueryAggregateUserArgs = {
   cursor?: Maybe<IUserWhereUniqueInput>;
   take?: Maybe<Scalars['Int']>;
   skip?: Maybe<Scalars['Int']>;
-  distinct?: Maybe<Array<IUserDistinctFieldEnum>>;
 };
 
 
@@ -191,7 +187,7 @@ export type IQueryFindFirstWorkspaceArgs = {
   cursor?: Maybe<IWorkspaceWhereUniqueInput>;
   take?: Maybe<Scalars['Int']>;
   skip?: Maybe<Scalars['Int']>;
-  distinct?: Maybe<Array<IWorkspaceDistinctFieldEnum>>;
+  distinct?: Maybe<Array<IWorkspaceScalarFieldEnum>>;
 };
 
 
@@ -201,7 +197,7 @@ export type IQueryWorkspacesArgs = {
   cursor?: Maybe<IWorkspaceWhereUniqueInput>;
   take?: Maybe<Scalars['Int']>;
   skip?: Maybe<Scalars['Int']>;
-  distinct?: Maybe<Array<IWorkspaceDistinctFieldEnum>>;
+  distinct?: Maybe<Array<IWorkspaceScalarFieldEnum>>;
 };
 
 
@@ -211,7 +207,6 @@ export type IQueryAggregateWorkspaceArgs = {
   cursor?: Maybe<IWorkspaceWhereUniqueInput>;
   take?: Maybe<Scalars['Int']>;
   skip?: Maybe<Scalars['Int']>;
-  distinct?: Maybe<Array<IWorkspaceDistinctFieldEnum>>;
 };
 
 export type ILabel = {
@@ -229,7 +224,7 @@ export type ILabelTasksArgs = {
   cursor?: Maybe<ITaskWhereUniqueInput>;
   take?: Maybe<Scalars['Int']>;
   skip?: Maybe<Scalars['Int']>;
-  distinct?: Maybe<Array<ITaskDistinctFieldEnum>>;
+  distinct?: Maybe<Array<ITaskScalarFieldEnum>>;
 };
 
 
@@ -254,7 +249,7 @@ export type ITaskLabelsArgs = {
   cursor?: Maybe<ILabelWhereUniqueInput>;
   take?: Maybe<Scalars['Int']>;
   skip?: Maybe<Scalars['Int']>;
-  distinct?: Maybe<Array<ILabelDistinctFieldEnum>>;
+  distinct?: Maybe<Array<ILabelScalarFieldEnum>>;
 };
 
 export type IUser = {
@@ -280,7 +275,7 @@ export type IUserTasksArgs = {
   cursor?: Maybe<ITaskWhereUniqueInput>;
   take?: Maybe<Scalars['Int']>;
   skip?: Maybe<Scalars['Int']>;
-  distinct?: Maybe<Array<ITaskDistinctFieldEnum>>;
+  distinct?: Maybe<Array<ITaskScalarFieldEnum>>;
 };
 
 
@@ -290,7 +285,7 @@ export type IUserWorkspacesArgs = {
   cursor?: Maybe<IWorkspaceWhereUniqueInput>;
   take?: Maybe<Scalars['Int']>;
   skip?: Maybe<Scalars['Int']>;
-  distinct?: Maybe<Array<IWorkspaceDistinctFieldEnum>>;
+  distinct?: Maybe<Array<IWorkspaceScalarFieldEnum>>;
 };
 
 
@@ -300,7 +295,7 @@ export type IUserProjectsArgs = {
   cursor?: Maybe<IProjectWhereUniqueInput>;
   take?: Maybe<Scalars['Int']>;
   skip?: Maybe<Scalars['Int']>;
-  distinct?: Maybe<Array<IProjectDistinctFieldEnum>>;
+  distinct?: Maybe<Array<IProjectScalarFieldEnum>>;
 };
 
 
@@ -310,7 +305,7 @@ export type IUserProjectOwnsArgs = {
   cursor?: Maybe<IProjectWhereUniqueInput>;
   take?: Maybe<Scalars['Int']>;
   skip?: Maybe<Scalars['Int']>;
-  distinct?: Maybe<Array<IProjectDistinctFieldEnum>>;
+  distinct?: Maybe<Array<IProjectScalarFieldEnum>>;
 };
 
 export enum IRole {
@@ -570,7 +565,7 @@ export type ITaskWhereUniqueInput = {
   id?: Maybe<Scalars['String']>;
 };
 
-export enum ITaskDistinctFieldEnum {
+export enum ITaskScalarFieldEnum {
   Id = 'id',
   Name = 'name',
   Content = 'content',
@@ -612,7 +607,7 @@ export type IWorkspaceWhereUniqueInput = {
   slug?: Maybe<Scalars['String']>;
 };
 
-export enum IWorkspaceDistinctFieldEnum {
+export enum IWorkspaceScalarFieldEnum {
   Id = 'id',
   Name = 'name',
   Slug = 'slug',
@@ -643,7 +638,7 @@ export type IProjectAssignUsersArgs = {
   cursor?: Maybe<IUserWhereUniqueInput>;
   take?: Maybe<Scalars['Int']>;
   skip?: Maybe<Scalars['Int']>;
-  distinct?: Maybe<Array<IUserDistinctFieldEnum>>;
+  distinct?: Maybe<Array<IUserScalarFieldEnum>>;
 };
 
 export type IUserOrderByInput = {
@@ -662,7 +657,7 @@ export type IUserWhereUniqueInput = {
   email?: Maybe<Scalars['String']>;
 };
 
-export enum IUserDistinctFieldEnum {
+export enum IUserScalarFieldEnum {
   Id = 'id',
   Email = 'email',
   Name = 'name',
@@ -686,7 +681,7 @@ export type IProjectWhereUniqueInput = {
   id?: Maybe<Scalars['String']>;
 };
 
-export enum IProjectDistinctFieldEnum {
+export enum IProjectScalarFieldEnum {
   Id = 'id',
   Name = 'name',
   CreatedAt = 'createdAt',
@@ -706,7 +701,7 @@ export type ILabelWhereUniqueInput = {
   name?: Maybe<Scalars['String']>;
 };
 
-export enum ILabelDistinctFieldEnum {
+export enum ILabelScalarFieldEnum {
   Id = 'id',
   Name = 'name',
   CreatedAt = 'createdAt'
@@ -714,27 +709,145 @@ export enum ILabelDistinctFieldEnum {
 
 export type IAggregateLabel = {
   __typename?: 'AggregateLabel';
-  count: Scalars['Int'];
+  count?: Maybe<Scalars['Int']>;
+  min?: Maybe<ILabelMinAggregate>;
+  max?: Maybe<ILabelMaxAggregate>;
+};
+
+export type ILabelMinAggregate = {
+  __typename?: 'LabelMinAggregate';
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+};
+
+export type ILabelMaxAggregate = {
+  __typename?: 'LabelMaxAggregate';
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
 };
 
 export type IAggregateProject = {
   __typename?: 'AggregateProject';
-  count: Scalars['Int'];
+  count?: Maybe<Scalars['Int']>;
+  min?: Maybe<IProjectMinAggregate>;
+  max?: Maybe<IProjectMaxAggregate>;
+};
+
+export type IProjectMinAggregate = {
+  __typename?: 'ProjectMinAggregate';
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  deletedAt?: Maybe<Scalars['DateTime']>;
+  userId?: Maybe<Scalars['String']>;
+};
+
+export type IProjectMaxAggregate = {
+  __typename?: 'ProjectMaxAggregate';
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  deletedAt?: Maybe<Scalars['DateTime']>;
+  userId?: Maybe<Scalars['String']>;
 };
 
 export type IAggregateTask = {
   __typename?: 'AggregateTask';
-  count: Scalars['Int'];
+  count?: Maybe<Scalars['Int']>;
+  min?: Maybe<ITaskMinAggregate>;
+  max?: Maybe<ITaskMaxAggregate>;
+};
+
+export type ITaskMinAggregate = {
+  __typename?: 'TaskMinAggregate';
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  content?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  deletedAt?: Maybe<Scalars['DateTime']>;
+  archiveAt?: Maybe<Scalars['DateTime']>;
+  userId?: Maybe<Scalars['String']>;
+};
+
+export type ITaskMaxAggregate = {
+  __typename?: 'TaskMaxAggregate';
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  content?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  deletedAt?: Maybe<Scalars['DateTime']>;
+  archiveAt?: Maybe<Scalars['DateTime']>;
+  userId?: Maybe<Scalars['String']>;
 };
 
 export type IAggregateUser = {
   __typename?: 'AggregateUser';
-  count: Scalars['Int'];
+  count?: Maybe<Scalars['Int']>;
+  min?: Maybe<IUserMinAggregate>;
+  max?: Maybe<IUserMaxAggregate>;
+};
+
+export type IUserMinAggregate = {
+  __typename?: 'UserMinAggregate';
+  id?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  password?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  deletedAt?: Maybe<Scalars['DateTime']>;
+  role?: Maybe<IRole>;
+};
+
+export type IUserMaxAggregate = {
+  __typename?: 'UserMaxAggregate';
+  id?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  password?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  deletedAt?: Maybe<Scalars['DateTime']>;
+  role?: Maybe<IRole>;
 };
 
 export type IAggregateWorkspace = {
   __typename?: 'AggregateWorkspace';
-  count: Scalars['Int'];
+  count?: Maybe<Scalars['Int']>;
+  min?: Maybe<IWorkspaceMinAggregate>;
+  max?: Maybe<IWorkspaceMaxAggregate>;
+};
+
+export type IWorkspaceMinAggregate = {
+  __typename?: 'WorkspaceMinAggregate';
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  slug?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  image?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  deletedAt?: Maybe<Scalars['DateTime']>;
+  userId?: Maybe<Scalars['String']>;
+};
+
+export type IWorkspaceMaxAggregate = {
+  __typename?: 'WorkspaceMaxAggregate';
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  slug?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  image?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  deletedAt?: Maybe<Scalars['DateTime']>;
+  userId?: Maybe<Scalars['String']>;
 };
 
 export type IMutation = {
@@ -1866,3 +1979,6 @@ export function useTaskFeedLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<I
 export type TaskFeedQueryHookResult = ReturnType<typeof useTaskFeedQuery>;
 export type TaskFeedLazyQueryHookResult = ReturnType<typeof useTaskFeedLazyQuery>;
 export type TaskFeedQueryResult = Apollo.QueryResult<ITaskFeedQuery, ITaskFeedQueryVariables>;
+export function refetchTaskFeedQuery(variables?: ITaskFeedQueryVariables) {
+      return { query: TaskFeedDocument, variables: variables }
+    }

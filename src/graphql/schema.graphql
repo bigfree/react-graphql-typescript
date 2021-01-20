@@ -6,23 +6,33 @@ schema {
 }
 
 type AggregateLabel {
-    count: Int!
+    count: Int
+    max: LabelMaxAggregate
+    min: LabelMinAggregate
 }
 
 type AggregateProject {
-    count: Int!
+    count: Int
+    max: ProjectMaxAggregate
+    min: ProjectMinAggregate
 }
 
 type AggregateTask {
-    count: Int!
+    count: Int
+    max: TaskMaxAggregate
+    min: TaskMinAggregate
 }
 
 type AggregateUser {
-    count: Int!
+    count: Int
+    max: UserMaxAggregate
+    min: UserMinAggregate
 }
 
 type AggregateWorkspace {
-    count: Int!
+    count: Int
+    max: WorkspaceMaxAggregate
+    min: WorkspaceMinAggregate
 }
 
 "Auth payload"
@@ -39,7 +49,19 @@ type Label {
     createdAt: DateTime!
     id: String!
     name: String!
-    tasks(cursor: TaskWhereUniqueInput, distinct: [TaskDistinctFieldEnum!], orderBy: [TaskOrderByInput!], skip: Int, take: Int, where: TaskWhereInput): [Task!]
+    tasks(cursor: TaskWhereUniqueInput, distinct: [TaskScalarFieldEnum!], orderBy: [TaskOrderByInput!], skip: Int, take: Int, where: TaskWhereInput): [Task!]
+}
+
+type LabelMaxAggregate {
+    createdAt: DateTime
+    id: String
+    name: String
+}
+
+type LabelMinAggregate {
+    createdAt: DateTime
+    id: String
+    name: String
 }
 
 type Mutation {
@@ -78,7 +100,7 @@ type Mutation {
 }
 
 type Project {
-    assignUsers(cursor: UserWhereUniqueInput, distinct: [UserDistinctFieldEnum!], orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): [User!]
+    assignUsers(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): [User!]
     createdAt: DateTime!
     deletedAt: DateTime
     id: String!
@@ -88,27 +110,45 @@ type Project {
     userId: String!
 }
 
+type ProjectMaxAggregate {
+    createdAt: DateTime
+    deletedAt: DateTime
+    id: String
+    name: String
+    updatedAt: DateTime
+    userId: String
+}
+
+type ProjectMinAggregate {
+    createdAt: DateTime
+    deletedAt: DateTime
+    id: String
+    name: String
+    updatedAt: DateTime
+    userId: String
+}
+
 type Query {
-    aggregateLabel(cursor: LabelWhereUniqueInput, distinct: [LabelDistinctFieldEnum!], orderBy: [LabelOrderByInput!], skip: Int, take: Int, where: LabelWhereInput): AggregateLabel!
-    aggregateProject(cursor: ProjectWhereUniqueInput, distinct: [ProjectDistinctFieldEnum!], orderBy: [ProjectOrderByInput!], skip: Int, take: Int, where: ProjectWhereInput): AggregateProject!
-    aggregateTask(cursor: TaskWhereUniqueInput, distinct: [TaskDistinctFieldEnum!], orderBy: [TaskOrderByInput!], skip: Int, take: Int, where: TaskWhereInput): AggregateTask!
-    aggregateUser(cursor: UserWhereUniqueInput, distinct: [UserDistinctFieldEnum!], orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): AggregateUser!
-    aggregateWorkspace(cursor: WorkspaceWhereUniqueInput, distinct: [WorkspaceDistinctFieldEnum!], orderBy: [WorkspaceOrderByInput!], skip: Int, take: Int, where: WorkspaceWhereInput): AggregateWorkspace!
-    findFirstLabel(cursor: LabelWhereUniqueInput, distinct: [LabelDistinctFieldEnum!], orderBy: [LabelOrderByInput!], skip: Int, take: Int, where: LabelWhereInput): Label
-    findFirstProject(cursor: ProjectWhereUniqueInput, distinct: [ProjectDistinctFieldEnum!], orderBy: [ProjectOrderByInput!], skip: Int, take: Int, where: ProjectWhereInput): Project
-    findFirstTask(cursor: TaskWhereUniqueInput, distinct: [TaskDistinctFieldEnum!], orderBy: [TaskOrderByInput!], skip: Int, take: Int, where: TaskWhereInput): Task
-    findFirstUser(cursor: UserWhereUniqueInput, distinct: [UserDistinctFieldEnum!], orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): User
-    findFirstWorkspace(cursor: WorkspaceWhereUniqueInput, distinct: [WorkspaceDistinctFieldEnum!], orderBy: [WorkspaceOrderByInput!], skip: Int, take: Int, where: WorkspaceWhereInput): Workspace
+    aggregateLabel(cursor: LabelWhereUniqueInput, orderBy: [LabelOrderByInput!], skip: Int, take: Int, where: LabelWhereInput): AggregateLabel!
+    aggregateProject(cursor: ProjectWhereUniqueInput, orderBy: [ProjectOrderByInput!], skip: Int, take: Int, where: ProjectWhereInput): AggregateProject!
+    aggregateTask(cursor: TaskWhereUniqueInput, orderBy: [TaskOrderByInput!], skip: Int, take: Int, where: TaskWhereInput): AggregateTask!
+    aggregateUser(cursor: UserWhereUniqueInput, orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): AggregateUser!
+    aggregateWorkspace(cursor: WorkspaceWhereUniqueInput, orderBy: [WorkspaceOrderByInput!], skip: Int, take: Int, where: WorkspaceWhereInput): AggregateWorkspace!
+    findFirstLabel(cursor: LabelWhereUniqueInput, distinct: [LabelScalarFieldEnum!], orderBy: [LabelOrderByInput!], skip: Int, take: Int, where: LabelWhereInput): Label
+    findFirstProject(cursor: ProjectWhereUniqueInput, distinct: [ProjectScalarFieldEnum!], orderBy: [ProjectOrderByInput!], skip: Int, take: Int, where: ProjectWhereInput): Project
+    findFirstTask(cursor: TaskWhereUniqueInput, distinct: [TaskScalarFieldEnum!], orderBy: [TaskOrderByInput!], skip: Int, take: Int, where: TaskWhereInput): Task
+    findFirstUser(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): User
+    findFirstWorkspace(cursor: WorkspaceWhereUniqueInput, distinct: [WorkspaceScalarFieldEnum!], orderBy: [WorkspaceOrderByInput!], skip: Int, take: Int, where: WorkspaceWhereInput): Workspace
     label(where: LabelWhereUniqueInput!): Label
-    labels(cursor: LabelWhereUniqueInput, distinct: [LabelDistinctFieldEnum!], orderBy: [LabelOrderByInput!], skip: Int, take: Int, where: LabelWhereInput): [Label!]!
+    labels(cursor: LabelWhereUniqueInput, distinct: [LabelScalarFieldEnum!], orderBy: [LabelOrderByInput!], skip: Int, take: Int, where: LabelWhereInput): [Label!]!
     project(where: ProjectWhereUniqueInput!): Project
-    projects(cursor: ProjectWhereUniqueInput, distinct: [ProjectDistinctFieldEnum!], orderBy: [ProjectOrderByInput!], skip: Int, take: Int, where: ProjectWhereInput): [Project!]!
+    projects(cursor: ProjectWhereUniqueInput, distinct: [ProjectScalarFieldEnum!], orderBy: [ProjectOrderByInput!], skip: Int, take: Int, where: ProjectWhereInput): [Project!]!
     task(where: TaskWhereUniqueInput!): Task
-    tasks(cursor: TaskWhereUniqueInput, distinct: [TaskDistinctFieldEnum!], orderBy: [TaskOrderByInput!], skip: Int, take: Int, where: TaskWhereInput): [Task!]!
+    tasks(cursor: TaskWhereUniqueInput, distinct: [TaskScalarFieldEnum!], orderBy: [TaskOrderByInput!], skip: Int, take: Int, where: TaskWhereInput): [Task!]!
     user(where: UserWhereUniqueInput!): User
-    users(cursor: UserWhereUniqueInput, distinct: [UserDistinctFieldEnum!], orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): [User!]!
+    users(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): [User!]!
     workspace(where: WorkspaceWhereUniqueInput!): Workspace
-    workspaces(cursor: WorkspaceWhereUniqueInput, distinct: [WorkspaceDistinctFieldEnum!], orderBy: [WorkspaceOrderByInput!], skip: Int, take: Int, where: WorkspaceWhereInput): [Workspace!]!
+    workspaces(cursor: WorkspaceWhereUniqueInput, distinct: [WorkspaceScalarFieldEnum!], orderBy: [WorkspaceOrderByInput!], skip: Int, take: Int, where: WorkspaceWhereInput): [Workspace!]!
 }
 
 type Task {
@@ -117,11 +157,33 @@ type Task {
     createdAt: DateTime!
     deletedAt: DateTime
     id: String!
-    labels(cursor: LabelWhereUniqueInput, distinct: [LabelDistinctFieldEnum!], orderBy: [LabelOrderByInput!], skip: Int, take: Int, where: LabelWhereInput): [Label!]
+    labels(cursor: LabelWhereUniqueInput, distinct: [LabelScalarFieldEnum!], orderBy: [LabelOrderByInput!], skip: Int, take: Int, where: LabelWhereInput): [Label!]
     name: String!
     updatedAt: DateTime
     user: User!
     userId: String!
+}
+
+type TaskMaxAggregate {
+    archiveAt: DateTime
+    content: String
+    createdAt: DateTime
+    deletedAt: DateTime
+    id: String
+    name: String
+    updatedAt: DateTime
+    userId: String
+}
+
+type TaskMinAggregate {
+    archiveAt: DateTime
+    content: String
+    createdAt: DateTime
+    deletedAt: DateTime
+    id: String
+    name: String
+    updatedAt: DateTime
+    userId: String
 }
 
 type User {
@@ -131,12 +193,34 @@ type User {
     id: String!
     name: String
     password: String!
-    projectOwns(cursor: ProjectWhereUniqueInput, distinct: [ProjectDistinctFieldEnum!], orderBy: [ProjectOrderByInput!], skip: Int, take: Int, where: ProjectWhereInput): [Project!]
-    projects(cursor: ProjectWhereUniqueInput, distinct: [ProjectDistinctFieldEnum!], orderBy: [ProjectOrderByInput!], skip: Int, take: Int, where: ProjectWhereInput): [Project!]
+    projectOwns(cursor: ProjectWhereUniqueInput, distinct: [ProjectScalarFieldEnum!], orderBy: [ProjectOrderByInput!], skip: Int, take: Int, where: ProjectWhereInput): [Project!]
+    projects(cursor: ProjectWhereUniqueInput, distinct: [ProjectScalarFieldEnum!], orderBy: [ProjectOrderByInput!], skip: Int, take: Int, where: ProjectWhereInput): [Project!]
     role: Role!
-    tasks(cursor: TaskWhereUniqueInput, distinct: [TaskDistinctFieldEnum!], orderBy: [TaskOrderByInput!], skip: Int, take: Int, where: TaskWhereInput): [Task!]
+    tasks(cursor: TaskWhereUniqueInput, distinct: [TaskScalarFieldEnum!], orderBy: [TaskOrderByInput!], skip: Int, take: Int, where: TaskWhereInput): [Task!]
     updatedAt: DateTime
-    workspaces(cursor: WorkspaceWhereUniqueInput, distinct: [WorkspaceDistinctFieldEnum!], orderBy: [WorkspaceOrderByInput!], skip: Int, take: Int, where: WorkspaceWhereInput): [Workspace!]
+    workspaces(cursor: WorkspaceWhereUniqueInput, distinct: [WorkspaceScalarFieldEnum!], orderBy: [WorkspaceOrderByInput!], skip: Int, take: Int, where: WorkspaceWhereInput): [Workspace!]
+}
+
+type UserMaxAggregate {
+    createdAt: DateTime
+    deletedAt: DateTime
+    email: String
+    id: String
+    name: String
+    password: String
+    role: Role
+    updatedAt: DateTime
+}
+
+type UserMinAggregate {
+    createdAt: DateTime
+    deletedAt: DateTime
+    email: String
+    id: String
+    name: String
+    password: String
+    role: Role
+    updatedAt: DateTime
 }
 
 type Workspace {
@@ -152,13 +236,37 @@ type Workspace {
     userId: String!
 }
 
-enum LabelDistinctFieldEnum {
+type WorkspaceMaxAggregate {
+    createdAt: DateTime
+    deletedAt: DateTime
+    description: String
+    id: String
+    image: String
+    name: String
+    slug: String
+    updatedAt: DateTime
+    userId: String
+}
+
+type WorkspaceMinAggregate {
+    createdAt: DateTime
+    deletedAt: DateTime
+    description: String
+    id: String
+    image: String
+    name: String
+    slug: String
+    updatedAt: DateTime
+    userId: String
+}
+
+enum LabelScalarFieldEnum {
     createdAt
     id
     name
 }
 
-enum ProjectDistinctFieldEnum {
+enum ProjectScalarFieldEnum {
     createdAt
     deletedAt
     id
@@ -184,7 +292,7 @@ enum SortOrder {
     desc
 }
 
-enum TaskDistinctFieldEnum {
+enum TaskScalarFieldEnum {
     archiveAt
     content
     createdAt
@@ -195,7 +303,7 @@ enum TaskDistinctFieldEnum {
     userId
 }
 
-enum UserDistinctFieldEnum {
+enum UserScalarFieldEnum {
     createdAt
     deletedAt
     email
@@ -206,7 +314,7 @@ enum UserDistinctFieldEnum {
     updatedAt
 }
 
-enum WorkspaceDistinctFieldEnum {
+enum WorkspaceScalarFieldEnum {
     createdAt
     deletedAt
     description

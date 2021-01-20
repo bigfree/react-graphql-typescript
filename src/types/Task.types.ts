@@ -1,4 +1,5 @@
 export type TDataFilter = {
 	taskName?: string;
-	taskCreatedAt?: string | null;
+	taskCreatedAt: string | null;
+	taskCreatedAtEnd: string | null;
 }
