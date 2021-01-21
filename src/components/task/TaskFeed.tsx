@@ -13,7 +13,8 @@ type TProps = {
 const useStyles = makeStyles((theme: Theme) => ({
 	root: {
 		flexGrow: 1,
-		padding: theme.spacing(0, 2, 2, 2),
+		padding: theme.spacing(2, 2, 2, 2),
+		overflow: 'auto',
 	},
 	paper: {
 		width: '100%',
@@ -60,7 +61,7 @@ const TaskFeed: React.FC<TProps> = ({ match, dataFilter }: TProps): JSX.Element 
 	} : {};
 
 	/**
-	 * Order tasks
+	 * Order task
 	 * @type {{createdAt: ISortOrder}}
 	 */
 	const taskOrderInput: ITaskOrderByInput = {
@@ -68,7 +69,7 @@ const TaskFeed: React.FC<TProps> = ({ match, dataFilter }: TProps): JSX.Element 
 	}
 
 	/**
-	 * Load tasks
+	 * Load task
 	 */
 	const { data, loading, error } = useTaskFeedQuery({
 		variables: {

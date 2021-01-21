@@ -26,6 +26,7 @@ const useStyles = makeStyles(() => ({
 	root: {
 		display: 'flex',
 		flexDirection: 'row',
+		height: '100vh'
 	},
 }));
 

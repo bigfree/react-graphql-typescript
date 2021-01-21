@@ -1,0 +1,13 @@
+query TaskDetail(
+    $taskWhereInput: TaskWhereUniqueInput!
+) {
+    task(
+        where: $taskWhereInput
+    ) {
+        id
+        name
+        content
+        userId
+        createdAt
+    }
+}
