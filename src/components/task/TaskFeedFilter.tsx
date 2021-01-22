@@ -20,9 +20,7 @@ type TFormData = {
 
 const useStyles = makeStyles((theme: Theme) => ({
 	root: {
-		flexGrow: 1,
 		padding: theme.spacing(2),
-		marginBottom: theme.spacing(2),
 		borderBottom: `1px solid ${theme.palette.divider}`,
 	},
 	nameFilter: {

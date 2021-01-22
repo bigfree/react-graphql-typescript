@@ -7,8 +7,10 @@ import TaskRoute from "../../routes/tasks/TaskRoute";
 
 const useStyles = makeStyles(() => ({
 	root: {
-		flex: 1,
-		width: '100%'
+		display: 'flex',
+		flexGrow: 1,
+		flexWrap: 'wrap',
+		flexDirection: 'column',
 	},
 }));
 

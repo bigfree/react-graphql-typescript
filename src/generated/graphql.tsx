@@ -1905,6 +1905,19 @@ export type IAuthInput = {
   name?: Maybe<Scalars['String']>;
 };
 
+export type ITaskDetailQueryVariables = Exact<{
+  taskWhereInput: ITaskWhereUniqueInput;
+}>;
+
+
+export type ITaskDetailQuery = (
+  { __typename?: 'Query' }
+  & { task?: Maybe<(
+    { __typename?: 'Task' }
+    & Pick<ITask, 'id' | 'name' | 'content' | 'userId' | 'createdAt'>
+  )> }
+);
+
 export type ITaskFeedQueryVariables = Exact<{
   taskOrderInput?: Maybe<Array<ITaskOrderByInput> | ITaskOrderByInput>;
   taskWhereInput?: Maybe<ITaskWhereInput>;
@@ -1926,7 +1939,61 @@ export type ITaskFeedQuery = (
   )> }
 );
 
+export type IUpdateTaskMutationVariables = Exact<{
+  updateTask: ITaskUpdateInput;
+  taskWhereInput: ITaskWhereUniqueInput;
+}>;
 
+
+export type IUpdateTaskMutation = (
+  { __typename?: 'Mutation' }
+  & { updateTask?: Maybe<(
+    { __typename?: 'Task' }
+    & Pick<ITask, 'id' | 'name' | 'content' | 'createdAt'>
+  )> }
+);
+
+
+export const TaskDetailDocument = gql`
+    query TaskDetail($taskWhereInput: TaskWhereUniqueInput!) {
+  task(where: $taskWhereInput) {
+    id
+    name
+    content
+    userId
+    createdAt
+  }
+}
+    `;
+
+/**
+ * __useTaskDetailQuery__
+ *
+ * To run a query within a React component, call `useTaskDetailQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTaskDetailQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTaskDetailQuery({
+ *   variables: {
+ *      taskWhereInput: // value for 'taskWhereInput'
+ *   },
+ * });
+ */
+export function useTaskDetailQuery(baseOptions: Apollo.QueryHookOptions<ITaskDetailQuery, ITaskDetailQueryVariables>) {
+        return Apollo.useQuery<ITaskDetailQuery, ITaskDetailQueryVariables>(TaskDetailDocument, baseOptions);
+      }
+export function useTaskDetailLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ITaskDetailQuery, ITaskDetailQueryVariables>) {
+          return Apollo.useLazyQuery<ITaskDetailQuery, ITaskDetailQueryVariables>(TaskDetailDocument, baseOptions);
+        }
+export type TaskDetailQueryHookResult = ReturnType<typeof useTaskDetailQuery>;
+export type TaskDetailLazyQueryHookResult = ReturnType<typeof useTaskDetailLazyQuery>;
+export type TaskDetailQueryResult = Apollo.QueryResult<ITaskDetailQuery, ITaskDetailQueryVariables>;
+export function refetchTaskDetailQuery(variables?: ITaskDetailQueryVariables) {
+      return { query: TaskDetailDocument, variables: variables }
+    }
 export const TaskFeedDocument = gql`
     query TaskFeed($taskOrderInput: [TaskOrderByInput!], $taskWhereInput: TaskWhereInput) {
   tasks(orderBy: $taskOrderInput, where: $taskWhereInput) {
@@ -1982,3 +2049,39 @@ export type TaskFeedQueryResult = Apollo.QueryResult<ITaskFeedQuery, ITaskFeedQu
 export function refetchTaskFeedQuery(variables?: ITaskFeedQueryVariables) {
       return { query: TaskFeedDocument, variables: variables }
     }
+export const UpdateTaskDocument = gql`
+    mutation UpdateTask($updateTask: TaskUpdateInput!, $taskWhereInput: TaskWhereUniqueInput!) {
+  updateTask(data: $updateTask, where: $taskWhereInput) {
+    id
+    name
+    content
+    createdAt
+  }
+}
+    `;
+export type IUpdateTaskMutationFn = Apollo.MutationFunction<IUpdateTaskMutation, IUpdateTaskMutationVariables>;
+
+/**
+ * __useUpdateTaskMutation__
+ *
+ * To run a mutation, you first call `useUpdateTaskMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateTaskMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateTaskMutation, { data, loading, error }] = useUpdateTaskMutation({
+ *   variables: {
+ *      updateTask: // value for 'updateTask'
+ *      taskWhereInput: // value for 'taskWhereInput'
+ *   },
+ * });
+ */
+export function useUpdateTaskMutation(baseOptions?: Apollo.MutationHookOptions<IUpdateTaskMutation, IUpdateTaskMutationVariables>) {
+        return Apollo.useMutation<IUpdateTaskMutation, IUpdateTaskMutationVariables>(UpdateTaskDocument, baseOptions);
+      }
+export type UpdateTaskMutationHookResult = ReturnType<typeof useUpdateTaskMutation>;
+export type UpdateTaskMutationResult = Apollo.MutationResult<IUpdateTaskMutation>;
+export type UpdateTaskMutationOptions = Apollo.BaseMutationOptions<IUpdateTaskMutation, IUpdateTaskMutationVariables>;
