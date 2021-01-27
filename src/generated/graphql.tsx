@@ -1915,6 +1915,10 @@ export type ITaskDetailQuery = (
   & { task?: Maybe<(
     { __typename?: 'Task' }
     & Pick<ITask, 'id' | 'name' | 'content' | 'userId' | 'createdAt'>
+    & { user: (
+      { __typename?: 'User' }
+      & Pick<IUser, 'name'>
+    ) }
   )> }
 );
 
@@ -1961,6 +1965,9 @@ export const TaskDetailDocument = gql`
     name
     content
     userId
+    user {
+      name
+    }
     createdAt
   }
 }

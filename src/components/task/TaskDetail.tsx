@@ -37,11 +37,14 @@ const useStyles = makeStyles((theme: Theme) => ({
 	},
 	cardHeader: {
 		borderBottom: `1px solid ${theme.palette.divider}`
+	},
+	formControl: {
+		width: `100%`,
 	}
 }));
 
 const TaskDetail: React.FC<TProps> = ({ routeProps }: TProps): JSX.Element => {
-	const { control, handleSubmit } = useForm<TFormData>();
+	const { control, handleSubmit, errors } = useForm<TFormData>();
 	const styles = useStyles();
 
 	/**
@@ -71,6 +74,7 @@ const TaskDetail: React.FC<TProps> = ({ routeProps }: TProps): JSX.Element => {
 	}
 
 	const onSubmit = (data: TFormData) => {
+		console.log(errors);
 		updateTaskMutation({
 			variables: {
 				taskWhereInput,
@@ -83,8 +87,12 @@ const TaskDetail: React.FC<TProps> = ({ routeProps }: TProps): JSX.Element => {
 		}).then(r => console.log(r));
 	}
 
+	const onBlur = () => handleSubmit(onSubmit)();
+
 	if (loading) return <p>Loading..</p>;
 	if (error) return <p>Error..</p>;
+
+	console.log(data);
 
 	return (
 		<Box className={styles.root}>
@@ -111,14 +119,18 @@ const TaskDetail: React.FC<TProps> = ({ routeProps }: TProps): JSX.Element => {
 							control={control}
 							defaultValue={data?.task?.name}
 							rules={{
-								required: true
+								required: true,
+								minLength: 1,
 							}}
 							render={({ onChange, value }) =>
 								<TextField
+									error={errors.name?.type === "required"}
 									variant={`outlined`}
 									value={value}
 									onChange={onChange}
-									label={`Task name`}
+									onBlur={onBlur}
+									label={errors.name ? `Field is required` :`Task name`}
+									className={styles.formControl}
 								/>
 							}
 						/>

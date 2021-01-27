@@ -8,6 +8,9 @@ query TaskDetail(
         name
         content
         userId
+        user {
+            name
+        }
         createdAt
     }
 }
