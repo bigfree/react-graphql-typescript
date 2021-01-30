@@ -3,6 +3,7 @@ import AddIcon from '@material-ui/icons/Add';
 import React from 'react';
 import { match } from "react-router-dom";
 import { IQueryMode, ITask, ITaskOrderByInput, ITaskWhereInput, useTaskFeedQuery } from "../../generated/graphql";
+import { useGlobalState } from '../../state';
 import { TDataFilter } from "../../types/Task.types";
 import NewTask from "./TaskNew";
 import TaskRow from "./TaskRow";
@@ -47,6 +48,7 @@ const useStyles = makeStyles((theme: Theme) => ({
  * @constructor
  */
 const TaskFeed: React.FC<TProps> = ({ match, dataFilter }: TProps): JSX.Element => {
+	const [newTask, setNewTask] = useGlobalState('openNewTask');
 	const styles = useStyles();
 
 	/**
@@ -83,9 +85,7 @@ const TaskFeed: React.FC<TProps> = ({ match, dataFilter }: TProps): JSX.Element 
 		variables: {
 			taskWhereInput,
 			taskOrderInput,
-		},
-		fetchPolicy: "cache-and-network",
-		nextFetchPolicy: "cache-first",
+		}
 	});
 
 	if (loading) return <p>Loading..</p>;
@@ -94,7 +94,7 @@ const TaskFeed: React.FC<TProps> = ({ match, dataFilter }: TProps): JSX.Element 
 
 	return (
 		<Box className={styles.root}>
-			<NewTask/>
+			{newTask ? <NewTask/> : ''}
 			<Paper className={styles.paper}>
 				<List className={styles.list}>
 					{data?.tasks.map((task: ITask) => (
@@ -106,6 +106,7 @@ const TaskFeed: React.FC<TProps> = ({ match, dataFilter }: TProps): JSX.Element 
 				color={`primary`}
 				aria-label={`Add task`}
 				className={styles.fab}
+				onClick={() => setNewTask(true)}
 			>
 				<AddIcon/>
 			</Fab>

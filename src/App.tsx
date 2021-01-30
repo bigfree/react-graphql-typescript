@@ -9,6 +9,8 @@ import AsideDrawer from "./components/aside/SiteAsideMenu";
 import SiteContent from "./components/content/SiteContent";
 import Navbar from "./components/navbar/Navbar";
 
+import 'fontsource-roboto';
+
 let themeMui = createMuiTheme({
 	palette: {
 		type: "dark",
