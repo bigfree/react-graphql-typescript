@@ -1,0 +1,25 @@
+mutation CreateTask(
+    $createTask: TaskCreateInput!
+) {
+    createTask(data: $createTask) {
+        id
+        name
+        content
+        createdAt
+        updatedAt
+        labels {
+            id
+            name
+            createdAt
+        }
+        userId
+        user {
+            id
+            email
+            name
+            password
+            createdAt
+            role
+        }
+    }
+}

@@ -1905,6 +1905,31 @@ export type IAuthInput = {
   name?: Maybe<Scalars['String']>;
 };
 
+export type ICreateTaskMutationVariables = Exact<{
+  createTask: ITaskCreateInput;
+}>;
+
+
+export type ICreateTaskMutation = (
+  { __typename?: 'Mutation' }
+  & { createTask: (
+    { __typename?: 'Task' }
+    & Pick<ITask, 'id' | 'name' | 'content' | 'createdAt' | 'updatedAt' | 'userId'>
+    & { labels?: Maybe<Array<(
+      { __typename?: 'Label' }
+      & Pick<ILabel, 'id' | 'name' | 'createdAt'>
+    )>>, user: (
+      { __typename?: 'User' }
+      & Pick<IUser, 'id' | 'email' | 'name' | 'password' | 'createdAt' | 'role'>
+    ) }
+  ) }
+);
+
+export type INewTaskTypeNameFragment = (
+  { __typename?: 'Task' }
+  & Pick<ITask, 'id'>
+);
+
 export type ITaskDetailQueryVariables = Exact<{
   taskWhereInput: ITaskWhereUniqueInput;
 }>;
@@ -1915,6 +1940,13 @@ export type ITaskDetailQuery = (
   & { task?: Maybe<(
     { __typename?: 'Task' }
     & Pick<ITask, 'id' | 'name' | 'content' | 'userId' | 'createdAt'>
+    & { labels?: Maybe<Array<(
+      { __typename?: 'Label' }
+      & Pick<ILabel, 'name'>
+    )>>, user: (
+      { __typename?: 'User' }
+      & Pick<IUser, 'name'>
+    ) }
   )> }
 );
 
@@ -1953,14 +1985,74 @@ export type IUpdateTaskMutation = (
   )> }
 );
 
+export const NewTaskTypeNameFragmentDoc = gql`
+    fragment NewTaskTypeName on Task {
+  id
+}
+    `;
+export const CreateTaskDocument = gql`
+    mutation CreateTask($createTask: TaskCreateInput!) {
+  createTask(data: $createTask) {
+    id
+    name
+    content
+    createdAt
+    updatedAt
+    labels {
+      id
+      name
+      createdAt
+    }
+    userId
+    user {
+      id
+      email
+      name
+      password
+      createdAt
+      role
+    }
+  }
+}
+    `;
+export type ICreateTaskMutationFn = Apollo.MutationFunction<ICreateTaskMutation, ICreateTaskMutationVariables>;
 
+/**
+ * __useCreateTaskMutation__
+ *
+ * To run a mutation, you first call `useCreateTaskMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateTaskMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createTaskMutation, { data, loading, error }] = useCreateTaskMutation({
+ *   variables: {
+ *      createTask: // value for 'createTask'
+ *   },
+ * });
+ */
+export function useCreateTaskMutation(baseOptions?: Apollo.MutationHookOptions<ICreateTaskMutation, ICreateTaskMutationVariables>) {
+        return Apollo.useMutation<ICreateTaskMutation, ICreateTaskMutationVariables>(CreateTaskDocument, baseOptions);
+      }
+export type CreateTaskMutationHookResult = ReturnType<typeof useCreateTaskMutation>;
+export type CreateTaskMutationResult = Apollo.MutationResult<ICreateTaskMutation>;
+export type CreateTaskMutationOptions = Apollo.BaseMutationOptions<ICreateTaskMutation, ICreateTaskMutationVariables>;
 export const TaskDetailDocument = gql`
     query TaskDetail($taskWhereInput: TaskWhereUniqueInput!) {
   task(where: $taskWhereInput) {
     id
     name
     content
+    labels {
+      name
+    }
     userId
+    user {
+      name
+    }
     createdAt
   }
 }

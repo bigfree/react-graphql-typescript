@@ -7,7 +7,13 @@ query TaskDetail(
         id
         name
         content
+        labels {
+            name
+        }
         userId
+        user {
+            name
+        }
         createdAt
     }
 }
