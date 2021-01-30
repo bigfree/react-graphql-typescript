@@ -1,0 +1,3 @@
+fragment NewTaskTypeName on Task {
+    id
+}

@@ -135,6 +135,9 @@ const TaskDetail: React.FC<TProps> = ({ routeProps }: TProps): JSX.Element => {
 							}
 						/>
 					</form>
+					<Box>
+						{JSON.stringify(data?.task)}
+					</Box>
 				</CardContent>
 			</Card>
 		</Box>
