@@ -1,8 +1,9 @@
-import { Box, Fab, List, makeStyles, Paper, Theme } from "@material-ui/core";
+import { Box, Collapse, Fab, List, makeStyles, Paper, Theme } from "@material-ui/core";
 import AddIcon from '@material-ui/icons/Add';
 import React from 'react';
 import { match } from "react-router-dom";
 import { IQueryMode, ITask, ITaskOrderByInput, ITaskWhereInput, useTaskFeedQuery } from "../../generated/graphql";
+import { useGlobalState } from '../../state';
 import { TDataFilter } from "../../types/Task.types";
 import NewTask from "./TaskNew";
 import TaskRow from "./TaskRow";
@@ -33,9 +34,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 		height: 59
 	},
 	fab: {
-		position: 'absolute',
-		bottom: theme.spacing(2),
-		right: theme.spacing(2),
+		position: 'fixed',
+		bottom: theme.spacing(3),
+		right: theme.spacing(3),
 	}
 }));
 
@@ -47,6 +48,7 @@ const useStyles = makeStyles((theme: Theme) => ({
  * @constructor
  */
 const TaskFeed: React.FC<TProps> = ({ match, dataFilter }: TProps): JSX.Element => {
+	const [newTask, setNewTask] = useGlobalState('openNewTask');
 	const styles = useStyles();
 
 	/**
@@ -83,18 +85,18 @@ const TaskFeed: React.FC<TProps> = ({ match, dataFilter }: TProps): JSX.Element 
 		variables: {
 			taskWhereInput,
 			taskOrderInput,
-		},
-		fetchPolicy: "cache-and-network",
-		nextFetchPolicy: "cache-first",
+		}
 	});
 
 	if (loading) return <p>Loading..</p>;
 
-	if (error) return <p>Error..</p>;
+	if (error) return <p>Error.. <div>{JSON.stringify(error) + JSON.stringify(data)}</div></p>;
 
 	return (
 		<Box className={styles.root}>
-			<NewTask/>
+			<Collapse in={newTask}>
+				<NewTask/>
+			</Collapse>
 			<Paper className={styles.paper}>
 				<List className={styles.list}>
 					{data?.tasks.map((task: ITask) => (
@@ -106,6 +108,7 @@ const TaskFeed: React.FC<TProps> = ({ match, dataFilter }: TProps): JSX.Element 
 				color={`primary`}
 				aria-label={`Add task`}
 				className={styles.fab}
+				onClick={() => setNewTask(true)}
 			>
 				<AddIcon/>
 			</Fab>

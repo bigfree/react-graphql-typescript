@@ -3,9 +3,16 @@ import { makeStyles } from "@material-ui/core/styles";
 import CloseIcon from "@material-ui/icons/Close";
 import { format, parseISO } from 'date-fns';
 import React from "react";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, ControllerRenderProps, useForm } from "react-hook-form";
 import { RouteComponentProps } from "react-router-dom";
-import { ITaskWhereUniqueInput, useTaskDetailQuery, useUpdateTaskMutation } from "../../generated/graphql";
+import {
+	ITaskDetailQuery,
+	ITaskWhereUniqueInput,
+	useTaskDetailQuery,
+	useUpdateTaskMutation
+} from "../../generated/graphql";
+import DeleteTaskHeaderMenu from "../shared/deleteTaskHeaderMenu";
+import TaskDetailLabels from "../shared/taskDetailLabels";
 
 type TRouteParams = {
 	id: string
@@ -44,8 +51,14 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const TaskDetail: React.FC<TProps> = ({ routeProps }: TProps): JSX.Element => {
-	const { control, handleSubmit, errors } = useForm<TFormData>();
 	const styles = useStyles();
+
+	/**
+	 * React form hooks init
+	 */
+	const { control, handleSubmit, errors, reset } = useForm<TFormData>({
+		mode: "onBlur",
+	});
 
 	/**
 	 * Task detail where input
@@ -61,20 +74,31 @@ const TaskDetail: React.FC<TProps> = ({ routeProps }: TProps): JSX.Element => {
 	const { data, loading, error } = useTaskDetailQuery({
 		variables: {
 			taskWhereInput
+		},
+		onCompleted: (data: ITaskDetailQuery) => {
+			reset({
+				name: data.task?.name
+			})
 		}
 	});
 
+	/**
+	 * Update task mutation
+	 */
 	const [updateTaskMutation] = useUpdateTaskMutation();
 
 	/**
-	 * Close task
+	 * Close task event
 	 */
 	const handleClickTask = () => {
 		routeProps.history.push(`/tasks`);
 	}
 
+	/**
+	 * Submit form event
+	 * @param {TFormData} data
+	 */
 	const onSubmit = (data: TFormData) => {
-		console.log(errors);
 		updateTaskMutation({
 			variables: {
 				taskWhereInput,
@@ -84,15 +108,19 @@ const TaskDetail: React.FC<TProps> = ({ routeProps }: TProps): JSX.Element => {
 					}
 				}
 			}
-		}).then(r => console.log(r));
+		}).then(res => {
+			console.log(res);
+		});
 	}
 
+	/**
+	 * OnBlur event
+	 * @returns {Promise<void>}
+	 */
 	const onBlur = () => handleSubmit(onSubmit)();
 
-	if (loading) return <p>Loading..</p>;
+	if (loading) return <Box className={styles.root}><p>Loading..</p></Box>;
 	if (error) return <p>Error..</p>;
-
-	console.log(data);
 
 	return (
 		<Box className={styles.root}>
@@ -106,30 +134,36 @@ const TaskDetail: React.FC<TProps> = ({ routeProps }: TProps): JSX.Element => {
 					}
 					title={data?.task?.name}
 					action={
-						<IconButton aria-label="close" onClick={handleClickTask}>
-							<CloseIcon/>
-						</IconButton>
+						<Box>
+							<DeleteTaskHeaderMenu taskData={data} routeProps={routeProps}/>
+							<IconButton aria-label="close" onClick={handleClickTask}>
+								<CloseIcon/>
+							</IconButton>
+						</Box>
 					}
 					subheader={format(parseISO(data?.task?.createdAt), `dd.MM.yyyy HH:mm`)}
 				/>
 				<CardContent>
+					<TaskDetailLabels taskData={data}/>
 					<form onSubmit={handleSubmit(onSubmit)} autoComplete={`off`}>
 						<Controller
 							name={`name`}
 							control={control}
-							defaultValue={data?.task?.name}
+							defaultValue={''}
 							rules={{
 								required: true,
 								minLength: 1,
 							}}
-							render={({ onChange, value }) =>
+							render={({ onChange, value, name, ref }: ControllerRenderProps) =>
 								<TextField
+									name={name}
+									ref={ref}
 									error={errors.name?.type === "required"}
 									variant={`outlined`}
 									value={value}
 									onChange={onChange}
 									onBlur={onBlur}
-									label={errors.name ? `Field is required` :`Task name`}
+									label={errors.name ? `Field is required` : `Task name`}
 									className={styles.formControl}
 								/>
 							}

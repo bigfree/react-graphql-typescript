@@ -2498,6 +2498,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/lodash@^4.14.168":
+  version "4.14.168"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.168.tgz#fe24632e79b7ade3f132891afff86caa5e5ce008"
+  integrity sha512-oVfRvqHV/V6D1yifJbVRU3TMp8OT6o6BG+U9MkwuJ3U8/CsDHvalRpsxBqivn71ztOFZBTfJMvETbqHiaNSj7Q==
+
 "@types/minimatch@*":
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
@@ -6077,9 +6082,9 @@ eslint@^7.11.0:
     v8-compile-cache "^2.0.3"
 
 eslint@^7.17.0:
-  version "7.18.0"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-7.18.0.tgz#7fdcd2f3715a41fe6295a16234bd69aed2c75e67"
-  integrity sha512-fbgTiE8BfUJZuBeq2Yi7J3RB3WGUQ9PNuNbmgi6jt9Iv8qrkxfy19Ds3OpL1Pm7zg3BtTVhvcUZbIRQ0wmSjAQ==
+  version "7.19.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-7.19.0.tgz#6719621b196b5fad72e43387981314e5d0dc3f41"
+  integrity sha512-CGlMgJY56JZ9ZSYhJuhow61lMPPjUzWmChFya71Z/jilVos7mR/jPgaEfVGgMBY5DshbKdG8Ezb8FDCHcoMEMg==
   dependencies:
     "@babel/code-frame" "^7.0.0"
     "@eslint/eslintrc" "^0.3.0"
@@ -6622,6 +6627,11 @@ follow-redirects@^1.0.0:
   version "1.13.0"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.13.0.tgz#b42e8d93a2a7eea5ed88633676d6597bc8e384db"
   integrity sha512-aq6gF1BEKje4a9i9+5jimNFIpq4Q1WiwBToeRK5NvZBd/TRsmW8BsJfOEGkr76TbOyPVD3OVDN910EcUNtRYEA==
+
+fontsource-roboto@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/fontsource-roboto/-/fontsource-roboto-4.0.0.tgz#35eacd4fb8d90199053c0eec9b34a57fb79cd820"
+  integrity sha512-zD6L8nvdWRcwSgp4ojxFchG+MPj8kXXQKDEAH9bfhbxy+lkpvpC1WgAK0lCa4dwobv+hvAe0uyHaawcgH7WH/g==
 
 for-in@^1.0.2:
   version "1.0.2"
@@ -11361,6 +11371,11 @@ react-hook-form@^6.14.1:
   version "6.14.2"
   resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-6.14.2.tgz#60ab0b5367b220a3d96aa0b17bd0f13f9d8c326a"
   integrity sha512-GgDUuT3Yfhl1BOcMl862uAFbCixSomtm3CVlQQ1qVu9Tq5BN2uUIRUIXP8l2Gy99eLUrBqU9x4E7N+si9cnvaw==
+
+react-hooks-global-state@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-hooks-global-state/-/react-hooks-global-state-1.0.1.tgz#3e4e1009f3e8a6fd001cd507808b4f1b289e9b27"
+  integrity sha512-GFe/7KOdf8toByd8eF5LBhogMn65XSyghIzInsnA1e8vqIxGdT2Ohs2Ohdclp8CX0QU9xNj72ZIt+WD/SQEh9Q==
 
 react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1:
   version "16.13.1"

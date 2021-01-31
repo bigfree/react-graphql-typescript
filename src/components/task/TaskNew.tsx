@@ -1,11 +1,14 @@
 import { ApolloCache } from "@apollo/client";
 import { FetchResult } from "@apollo/client/link/core";
-import { Paper, TextField, Theme } from "@material-ui/core";
+import { Box, Button, Paper, TextField, Theme } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import AddCircle from '@material-ui/icons/AddCircle';
+import Close from '@material-ui/icons/Close';
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { ICreateTaskMutation, NewTaskTypeNameFragmentDoc, useCreateTaskMutation } from "../../generated/graphql";
+import { useGlobalState } from '../../state';
 
 type TFormData = {
 	name: string
@@ -14,14 +17,35 @@ type TFormData = {
 const useStyles = makeStyles((theme: Theme) => ({
 	root: {
 		marginBottom: theme.spacing(2),
+	},
+	form: {
+		position: 'relative',
+	},
+	box: {
+		position: 'absolute',
+		top: `${2 + theme.spacing(1)}px`,
+		right: `${2 + theme.spacing(1)}px`,
+	},
+	button: {
+		fontWeight: 'bold',
+		marginLeft: `${2 + theme.spacing(1)}px`,
 	}
 }));
 
+/**
+ * New Task Component
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const NewTask: React.FC = (): JSX.Element => {
+	const [, setNewTask] = useGlobalState('openNewTask');
 	const { control, handleSubmit, reset } = useForm<TFormData>();
 	const styles = useStyles();
 	const history = useHistory();
 
+	/**
+	 * New task mutation
+	 */
 	const [createTaskMutation, { error }] = useCreateTaskMutation({
 		update: (cache: ApolloCache<ICreateTaskMutation>, { data }: FetchResult<ICreateTaskMutation>) => {
 			cache.modify({
@@ -32,7 +56,7 @@ const NewTask: React.FC = (): JSX.Element => {
 							fragment: NewTaskTypeNameFragmentDoc
 						});
 
-						if (existingTodosRefs.some((ref: any) => readField('id', ref) === data?.createTask.id)) {
+						if (existingTodosRefs.some((ref: any) => data?.createTask.id === readField('id', ref))) {
 							return existingTodosRefs
 						}
 
@@ -44,8 +68,11 @@ const NewTask: React.FC = (): JSX.Element => {
 		refetchQueries: ['tasks']
 	});
 
+	/**
+	 * OnSubmit form
+	 * @param {TFormData} data
+	 */
 	const onSubmit = (data: TFormData) => {
-		console.log(data);
 		createTaskMutation({
 			variables: {
 				createTask: {
@@ -67,13 +94,15 @@ const NewTask: React.FC = (): JSX.Element => {
 
 			// Reset form fields
 			reset();
-			console.log(res);
+
+			// Close create new task component
+			setNewTask(false)
 		});
 	}
 
 	return (
 		<Paper className={styles.root}>
-			<form onSubmit={handleSubmit(onSubmit)} autoComplete={`off`}>
+			<form onSubmit={handleSubmit(onSubmit)} autoComplete={`off`} className={styles.form}>
 				<Controller
 					name={`name`}
 					control={control}
@@ -83,11 +112,31 @@ const NewTask: React.FC = (): JSX.Element => {
 							value={value}
 							onChange={onChange}
 							placeholder={`Add new task`}
-							variant='outlined'
+							variant={'outlined'}
 							fullWidth
 						/>
 					}
 				/>
+				<Box className={styles.box}>
+					<Button
+						variant={'contained'}
+						color={'secondary'}
+						className={styles.button}
+						type={'submit'}
+						startIcon={<AddCircle/>}
+					>
+						Add Task
+					</Button>
+					<Button
+						variant={'contained'}
+						color={'primary'}
+						className={styles.button}
+						startIcon={<Close/>}
+						onClick={() => setNewTask(false)}
+					>
+						Close
+					</Button>
+				</Box>
 			</form>
 		</Paper>
 	)

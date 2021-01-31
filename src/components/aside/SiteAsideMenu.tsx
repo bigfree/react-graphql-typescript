@@ -33,7 +33,7 @@ const AsideDrawer: React.FC = (): JSX.Element => {
 	const css = useStyles();
 	const { pathname } = useLocation();
 
-	console.log(pathname);
+	console.log(pathname.split('/'));
 
 	return (
 		<Drawer
@@ -68,7 +68,7 @@ const AsideDrawer: React.FC = (): JSX.Element => {
 						<ListItem
 							button
 							key="Tasks"
-							selected={'/tasks' === pathname}
+							selected={pathname.split('/').includes('tasks')}
 						>
 							<ListItemIcon>
 								<InboxIcon/>

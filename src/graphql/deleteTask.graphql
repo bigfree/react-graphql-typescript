@@ -1,0 +1,9 @@
+mutation DeleteTask(
+    $taskWhereInput: TaskWhereUniqueInput!
+) {
+    deleteTask(
+        where: $taskWhereInput
+    ) {
+        id
+    }
+}
