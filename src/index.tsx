@@ -4,6 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from "react-router-dom";
 import App from './App';
+import './App.css';
 import reportWebVitals from './reportWebVitals';
 
 const httpLink = createHttpLink({
@@ -37,11 +38,9 @@ const client = new ApolloClient({
 
 ReactDOM.render(
 	<BrowserRouter>
-		<React.StrictMode>
-			<ApolloProvider client={client}>
-				<App/>
-			</ApolloProvider>
-		</React.StrictMode>
+		<ApolloProvider client={client}>
+			<App/>
+		</ApolloProvider>
 	</BrowserRouter>,
 	document.getElementById('root')
 );

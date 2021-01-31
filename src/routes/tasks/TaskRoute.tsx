@@ -15,11 +15,13 @@ const useStyles = makeStyles(() => ({
 		display: 'flex',
 		flexGrow: 1,
 		flexDirection: 'column',
+		height: 'calc(100vh - 64px)',
 	},
 	taskContainer: {
 		display: 'flex',
 		flexGrow: 1,
 		alignItems: 'stretch',
+		minHeight: '1px'
 	}
 }));
 

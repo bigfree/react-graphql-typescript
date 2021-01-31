@@ -8,7 +8,7 @@ query TaskDetail(
         name
         content
         labels {
-            name
+            id
         }
         userId
         user {

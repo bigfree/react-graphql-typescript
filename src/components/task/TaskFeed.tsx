@@ -1,4 +1,4 @@
-import { Box, Fab, List, makeStyles, Paper, Theme } from "@material-ui/core";
+import { Box, Collapse, Fab, List, makeStyles, Paper, Theme } from "@material-ui/core";
 import AddIcon from '@material-ui/icons/Add';
 import React from 'react';
 import { match } from "react-router-dom";
@@ -34,9 +34,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 		height: 59
 	},
 	fab: {
-		position: 'absolute',
-		bottom: theme.spacing(2),
-		right: theme.spacing(2),
+		position: 'fixed',
+		bottom: theme.spacing(3),
+		right: theme.spacing(3),
 	}
 }));
 
@@ -90,11 +90,13 @@ const TaskFeed: React.FC<TProps> = ({ match, dataFilter }: TProps): JSX.Element 
 
 	if (loading) return <p>Loading..</p>;
 
-	if (error) return <p>Error..</p>;
+	if (error) return <p>Error.. <div>{JSON.stringify(error) + JSON.stringify(data)}</div></p>;
 
 	return (
 		<Box className={styles.root}>
-			{newTask ? <NewTask/> : ''}
+			<Collapse in={newTask}>
+				<NewTask/>
+			</Collapse>
 			<Paper className={styles.paper}>
 				<List className={styles.list}>
 					{data?.tasks.map((task: ITask) => (

@@ -9,8 +9,9 @@ const useStyles = makeStyles(() => ({
 	root: {
 		display: 'flex',
 		flexGrow: 1,
-		flexWrap: 'wrap',
+		flexWrap: 'nowrap',
 		flexDirection: 'column',
+		height: '100vh'
 	},
 }));
 

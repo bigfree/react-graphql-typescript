@@ -1925,9 +1925,33 @@ export type ICreateTaskMutation = (
   ) }
 );
 
+export type IDeleteTaskMutationVariables = Exact<{
+  taskWhereInput: ITaskWhereUniqueInput;
+}>;
+
+
+export type IDeleteTaskMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteTask?: Maybe<(
+    { __typename?: 'Task' }
+    & Pick<ITask, 'id'>
+  )> }
+);
+
 export type INewTaskTypeNameFragment = (
   { __typename?: 'Task' }
   & Pick<ITask, 'id'>
+);
+
+export type ILabelFeedQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ILabelFeedQuery = (
+  { __typename?: 'Query' }
+  & { labels: Array<(
+    { __typename?: 'Label' }
+    & Pick<ILabel, 'id' | 'name' | 'createdAt'>
+  )> }
 );
 
 export type ITaskDetailQueryVariables = Exact<{
@@ -1942,7 +1966,7 @@ export type ITaskDetailQuery = (
     & Pick<ITask, 'id' | 'name' | 'content' | 'userId' | 'createdAt'>
     & { labels?: Maybe<Array<(
       { __typename?: 'Label' }
-      & Pick<ILabel, 'name'>
+      & Pick<ILabel, 'id'>
     )>>, user: (
       { __typename?: 'User' }
       & Pick<IUser, 'name'>
@@ -2040,6 +2064,75 @@ export function useCreateTaskMutation(baseOptions?: Apollo.MutationHookOptions<I
 export type CreateTaskMutationHookResult = ReturnType<typeof useCreateTaskMutation>;
 export type CreateTaskMutationResult = Apollo.MutationResult<ICreateTaskMutation>;
 export type CreateTaskMutationOptions = Apollo.BaseMutationOptions<ICreateTaskMutation, ICreateTaskMutationVariables>;
+export const DeleteTaskDocument = gql`
+    mutation DeleteTask($taskWhereInput: TaskWhereUniqueInput!) {
+  deleteTask(where: $taskWhereInput) {
+    id
+  }
+}
+    `;
+export type IDeleteTaskMutationFn = Apollo.MutationFunction<IDeleteTaskMutation, IDeleteTaskMutationVariables>;
+
+/**
+ * __useDeleteTaskMutation__
+ *
+ * To run a mutation, you first call `useDeleteTaskMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteTaskMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteTaskMutation, { data, loading, error }] = useDeleteTaskMutation({
+ *   variables: {
+ *      taskWhereInput: // value for 'taskWhereInput'
+ *   },
+ * });
+ */
+export function useDeleteTaskMutation(baseOptions?: Apollo.MutationHookOptions<IDeleteTaskMutation, IDeleteTaskMutationVariables>) {
+        return Apollo.useMutation<IDeleteTaskMutation, IDeleteTaskMutationVariables>(DeleteTaskDocument, baseOptions);
+      }
+export type DeleteTaskMutationHookResult = ReturnType<typeof useDeleteTaskMutation>;
+export type DeleteTaskMutationResult = Apollo.MutationResult<IDeleteTaskMutation>;
+export type DeleteTaskMutationOptions = Apollo.BaseMutationOptions<IDeleteTaskMutation, IDeleteTaskMutationVariables>;
+export const LabelFeedDocument = gql`
+    query LabelFeed {
+  labels {
+    id
+    name
+    createdAt
+  }
+}
+    `;
+
+/**
+ * __useLabelFeedQuery__
+ *
+ * To run a query within a React component, call `useLabelFeedQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLabelFeedQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLabelFeedQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useLabelFeedQuery(baseOptions?: Apollo.QueryHookOptions<ILabelFeedQuery, ILabelFeedQueryVariables>) {
+        return Apollo.useQuery<ILabelFeedQuery, ILabelFeedQueryVariables>(LabelFeedDocument, baseOptions);
+      }
+export function useLabelFeedLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ILabelFeedQuery, ILabelFeedQueryVariables>) {
+          return Apollo.useLazyQuery<ILabelFeedQuery, ILabelFeedQueryVariables>(LabelFeedDocument, baseOptions);
+        }
+export type LabelFeedQueryHookResult = ReturnType<typeof useLabelFeedQuery>;
+export type LabelFeedLazyQueryHookResult = ReturnType<typeof useLabelFeedLazyQuery>;
+export type LabelFeedQueryResult = Apollo.QueryResult<ILabelFeedQuery, ILabelFeedQueryVariables>;
+export function refetchLabelFeedQuery(variables?: ILabelFeedQueryVariables) {
+      return { query: LabelFeedDocument, variables: variables }
+    }
 export const TaskDetailDocument = gql`
     query TaskDetail($taskWhereInput: TaskWhereUniqueInput!) {
   task(where: $taskWhereInput) {
@@ -2047,7 +2140,7 @@ export const TaskDetailDocument = gql`
     name
     content
     labels {
-      name
+      id
     }
     userId
     user {
