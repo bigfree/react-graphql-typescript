@@ -1,8 +1,9 @@
-import { Avatar, Box, Card, CardContent, CardHeader, IconButton, TextField, Theme } from "@material-ui/core";
+import { Avatar, Box, Card, CardContent, CardHeader, IconButton, Snackbar, TextField, Theme } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import CloseIcon from "@material-ui/icons/Close";
+import { Alert } from "@material-ui/lab";
 import { format, parseISO } from 'date-fns';
-import React from "react";
+import React, { useState } from "react";
 import { Controller, ControllerRenderProps, useForm } from "react-hook-form";
 import { RouteComponentProps } from "react-router-dom";
 import {
@@ -52,6 +53,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const TaskDetail: React.FC<TProps> = ({ routeProps }: TProps): JSX.Element => {
 	const styles = useStyles();
+	const [openSnack, setOpenSnack] = useState<boolean>(false);
 
 	/**
 	 * React form hooks init
@@ -108,9 +110,7 @@ const TaskDetail: React.FC<TProps> = ({ routeProps }: TProps): JSX.Element => {
 					}
 				}
 			}
-		}).then(res => {
-			console.log(res);
-		});
+		}).then(() => setOpenSnack(true));
 	}
 
 	/**
@@ -118,6 +118,14 @@ const TaskDetail: React.FC<TProps> = ({ routeProps }: TProps): JSX.Element => {
 	 * @returns {Promise<void>}
 	 */
 	const onBlur = () => handleSubmit(onSubmit)();
+
+	const handleCloseSnackbar = (_event: React.SyntheticEvent | React.MouseEvent, reason?: string) => {
+		if ('clickaway' === reason) {
+			return;
+		}
+
+		setOpenSnack(false);
+	}
 
 	if (loading) return <Box className={styles.root}><p>Loading..</p></Box>;
 	if (error) return <p>Error..</p>;
@@ -174,6 +182,19 @@ const TaskDetail: React.FC<TProps> = ({ routeProps }: TProps): JSX.Element => {
 					</Box>
 				</CardContent>
 			</Card>
+			<Snackbar
+				anchorOrigin={{
+					vertical: 'bottom',
+					horizontal: 'left',
+				}}
+				open={openSnack}
+				autoHideDuration={2000}
+				onClose={handleCloseSnackbar}
+			>
+				<Alert onClose={handleCloseSnackbar} severity="success">
+					Task updated
+				</Alert>
+			</Snackbar>
 		</Box>
 	);
 }

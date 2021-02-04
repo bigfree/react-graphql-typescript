@@ -33,7 +33,7 @@ const AsideDrawer: React.FC = (): JSX.Element => {
 	const css = useStyles();
 	const { pathname } = useLocation();
 
-	console.log(pathname.split('/'));
+	// console.log(pathname.split('/'));
 
 	return (
 		<Drawer
