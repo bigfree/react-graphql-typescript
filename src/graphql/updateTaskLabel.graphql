@@ -1,0 +1,16 @@
+mutation UpdateTaskLabel(
+    $updateTask: TaskUpdateInput!,
+    $taskWhereInput: TaskWhereUniqueInput!
+) {
+    updateTask(
+        data: $updateTask,
+        where: $taskWhereInput
+    ) {
+        id
+        name
+        labels {
+            id
+            name
+        }
+    }
+}

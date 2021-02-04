@@ -213,7 +213,7 @@ export type ILabel = {
   __typename?: 'Label';
   id: Scalars['String'];
   name: Scalars['String'];
-  createdAt: Scalars['DateTime'];
+  createdAt?: Maybe<Scalars['DateTime']>;
   tasks?: Maybe<Array<ITask>>;
 };
 
@@ -233,7 +233,7 @@ export type ITask = {
   id: Scalars['String'];
   name: Scalars['String'];
   content?: Maybe<Scalars['String']>;
-  createdAt: Scalars['DateTime'];
+  createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   deletedAt?: Maybe<Scalars['DateTime']>;
   archiveAt?: Maybe<Scalars['DateTime']>;
@@ -258,7 +258,7 @@ export type IUser = {
   email: Scalars['String'];
   name?: Maybe<Scalars['String']>;
   password: Scalars['String'];
-  createdAt: Scalars['DateTime'];
+  createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   deletedAt?: Maybe<Scalars['DateTime']>;
   role: IRole;
@@ -322,7 +322,7 @@ export type ITaskWhereInput = {
   id?: Maybe<IStringFilter>;
   name?: Maybe<IStringFilter>;
   content?: Maybe<IStringNullableFilter>;
-  createdAt?: Maybe<IDateTimeFilter>;
+  createdAt?: Maybe<IDateTimeNullableFilter>;
   updatedAt?: Maybe<IDateTimeNullableFilter>;
   deletedAt?: Maybe<IDateTimeNullableFilter>;
   archiveAt?: Maybe<IDateTimeNullableFilter>;
@@ -394,28 +394,6 @@ export type INestedStringNullableFilter = {
   not?: Maybe<INestedStringNullableFilter>;
 };
 
-export type IDateTimeFilter = {
-  equals?: Maybe<Scalars['DateTime']>;
-  in?: Maybe<Array<Scalars['DateTime']>>;
-  notIn?: Maybe<Array<Scalars['DateTime']>>;
-  lt?: Maybe<Scalars['DateTime']>;
-  lte?: Maybe<Scalars['DateTime']>;
-  gt?: Maybe<Scalars['DateTime']>;
-  gte?: Maybe<Scalars['DateTime']>;
-  not?: Maybe<INestedDateTimeFilter>;
-};
-
-export type INestedDateTimeFilter = {
-  equals?: Maybe<Scalars['DateTime']>;
-  in?: Maybe<Array<Scalars['DateTime']>>;
-  notIn?: Maybe<Array<Scalars['DateTime']>>;
-  lt?: Maybe<Scalars['DateTime']>;
-  lte?: Maybe<Scalars['DateTime']>;
-  gt?: Maybe<Scalars['DateTime']>;
-  gte?: Maybe<Scalars['DateTime']>;
-  not?: Maybe<INestedDateTimeFilter>;
-};
-
 export type IDateTimeNullableFilter = {
   equals?: Maybe<Scalars['DateTime']>;
   in?: Maybe<Array<Scalars['DateTime']>>;
@@ -451,7 +429,7 @@ export type IUserWhereInput = {
   email?: Maybe<IStringFilter>;
   name?: Maybe<IStringNullableFilter>;
   password?: Maybe<IStringFilter>;
-  createdAt?: Maybe<IDateTimeFilter>;
+  createdAt?: Maybe<IDateTimeNullableFilter>;
   updatedAt?: Maybe<IDateTimeNullableFilter>;
   deletedAt?: Maybe<IDateTimeNullableFilter>;
   role?: Maybe<IEnumRoleFilter>;
@@ -496,7 +474,7 @@ export type IWorkspaceWhereInput = {
   slug?: Maybe<IStringFilter>;
   description?: Maybe<IStringNullableFilter>;
   image?: Maybe<IStringNullableFilter>;
-  createdAt?: Maybe<IDateTimeFilter>;
+  createdAt?: Maybe<IDateTimeNullableFilter>;
   updatedAt?: Maybe<IDateTimeNullableFilter>;
   deletedAt?: Maybe<IDateTimeNullableFilter>;
   user?: Maybe<IUserRelationFilter>;
@@ -515,7 +493,7 @@ export type IProjectWhereInput = {
   NOT?: Maybe<Array<IProjectWhereInput>>;
   id?: Maybe<IStringFilter>;
   name?: Maybe<IStringFilter>;
-  createdAt?: Maybe<IDateTimeFilter>;
+  createdAt?: Maybe<IDateTimeNullableFilter>;
   updatedAt?: Maybe<IDateTimeNullableFilter>;
   deletedAt?: Maybe<IDateTimeNullableFilter>;
   projectOwner?: Maybe<IUserRelationFilter>;
@@ -541,7 +519,7 @@ export type ILabelWhereInput = {
   NOT?: Maybe<Array<ILabelWhereInput>>;
   id?: Maybe<IStringFilter>;
   name?: Maybe<IStringFilter>;
-  createdAt?: Maybe<IDateTimeFilter>;
+  createdAt?: Maybe<IDateTimeNullableFilter>;
   tasks?: Maybe<ITaskListRelationFilter>;
 };
 
@@ -583,7 +561,7 @@ export type IWorkspace = {
   slug: Scalars['String'];
   description?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
-  createdAt: Scalars['DateTime'];
+  createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   deletedAt?: Maybe<Scalars['DateTime']>;
   userId: Scalars['String'];
@@ -623,7 +601,7 @@ export type IProject = {
   __typename?: 'Project';
   id: Scalars['String'];
   name: Scalars['String'];
-  createdAt: Scalars['DateTime'];
+  createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   deletedAt?: Maybe<Scalars['DateTime']>;
   userId: Scalars['String'];
@@ -1274,7 +1252,7 @@ export type ITaskCreateOrConnectWithoutlabelsInput = {
 export type ILabelUpdateInput = {
   id?: Maybe<IStringFieldUpdateOperationsInput>;
   name?: Maybe<IStringFieldUpdateOperationsInput>;
-  createdAt?: Maybe<IDateTimeFieldUpdateOperationsInput>;
+  createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   tasks?: Maybe<ITaskUpdateManyWithoutLabelsInput>;
 };
 
@@ -1282,7 +1260,7 @@ export type IStringFieldUpdateOperationsInput = {
   set?: Maybe<Scalars['String']>;
 };
 
-export type IDateTimeFieldUpdateOperationsInput = {
+export type INullableDateTimeFieldUpdateOperationsInput = {
   set?: Maybe<Scalars['DateTime']>;
 };
 
@@ -1308,7 +1286,7 @@ export type ITaskUpdateWithoutLabelsInput = {
   id?: Maybe<IStringFieldUpdateOperationsInput>;
   name?: Maybe<IStringFieldUpdateOperationsInput>;
   content?: Maybe<INullableStringFieldUpdateOperationsInput>;
-  createdAt?: Maybe<IDateTimeFieldUpdateOperationsInput>;
+  createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   deletedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   archiveAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
@@ -1317,10 +1295,6 @@ export type ITaskUpdateWithoutLabelsInput = {
 
 export type INullableStringFieldUpdateOperationsInput = {
   set?: Maybe<Scalars['String']>;
-};
-
-export type INullableDateTimeFieldUpdateOperationsInput = {
-  set?: Maybe<Scalars['DateTime']>;
 };
 
 export type IUserUpdateOneRequiredWithoutTasksInput = {
@@ -1336,7 +1310,7 @@ export type IUserUpdateWithoutTasksInput = {
   email?: Maybe<IStringFieldUpdateOperationsInput>;
   name?: Maybe<INullableStringFieldUpdateOperationsInput>;
   password?: Maybe<IStringFieldUpdateOperationsInput>;
-  createdAt?: Maybe<IDateTimeFieldUpdateOperationsInput>;
+  createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   deletedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   role?: Maybe<IEnumRoleFieldUpdateOperationsInput>;
@@ -1373,7 +1347,7 @@ export type IWorkspaceUpdateWithoutUserInput = {
   slug?: Maybe<IStringFieldUpdateOperationsInput>;
   description?: Maybe<INullableStringFieldUpdateOperationsInput>;
   image?: Maybe<INullableStringFieldUpdateOperationsInput>;
-  createdAt?: Maybe<IDateTimeFieldUpdateOperationsInput>;
+  createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   deletedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
 };
@@ -1392,7 +1366,7 @@ export type IWorkspaceScalarWhereInput = {
   slug?: Maybe<IStringFilter>;
   description?: Maybe<IStringNullableFilter>;
   image?: Maybe<IStringNullableFilter>;
-  createdAt?: Maybe<IDateTimeFilter>;
+  createdAt?: Maybe<IDateTimeNullableFilter>;
   updatedAt?: Maybe<IDateTimeNullableFilter>;
   deletedAt?: Maybe<IDateTimeNullableFilter>;
   userId?: Maybe<IStringFilter>;
@@ -1404,7 +1378,7 @@ export type IWorkspaceUpdateManyMutationInput = {
   slug?: Maybe<IStringFieldUpdateOperationsInput>;
   description?: Maybe<INullableStringFieldUpdateOperationsInput>;
   image?: Maybe<INullableStringFieldUpdateOperationsInput>;
-  createdAt?: Maybe<IDateTimeFieldUpdateOperationsInput>;
+  createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   deletedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
 };
@@ -1436,7 +1410,7 @@ export type IProjectUpdateWithWhereUniqueWithoutAssignUsersInput = {
 export type IProjectUpdateWithoutAssignUsersInput = {
   id?: Maybe<IStringFieldUpdateOperationsInput>;
   name?: Maybe<IStringFieldUpdateOperationsInput>;
-  createdAt?: Maybe<IDateTimeFieldUpdateOperationsInput>;
+  createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   deletedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   projectOwner?: Maybe<IUserUpdateOneRequiredWithoutProjectOwnsInput>;
@@ -1455,7 +1429,7 @@ export type IUserUpdateWithoutProjectOwnsInput = {
   email?: Maybe<IStringFieldUpdateOperationsInput>;
   name?: Maybe<INullableStringFieldUpdateOperationsInput>;
   password?: Maybe<IStringFieldUpdateOperationsInput>;
-  createdAt?: Maybe<IDateTimeFieldUpdateOperationsInput>;
+  createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   deletedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   role?: Maybe<IEnumRoleFieldUpdateOperationsInput>;
@@ -1486,7 +1460,7 @@ export type ITaskUpdateWithoutUserInput = {
   id?: Maybe<IStringFieldUpdateOperationsInput>;
   name?: Maybe<IStringFieldUpdateOperationsInput>;
   content?: Maybe<INullableStringFieldUpdateOperationsInput>;
-  createdAt?: Maybe<IDateTimeFieldUpdateOperationsInput>;
+  createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   deletedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   archiveAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
@@ -1514,7 +1488,7 @@ export type ILabelUpdateWithWhereUniqueWithoutTasksInput = {
 export type ILabelUpdateWithoutTasksInput = {
   id?: Maybe<IStringFieldUpdateOperationsInput>;
   name?: Maybe<IStringFieldUpdateOperationsInput>;
-  createdAt?: Maybe<IDateTimeFieldUpdateOperationsInput>;
+  createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
 };
 
 export type ILabelUpdateManyWithWhereWithoutTasksInput = {
@@ -1528,13 +1502,13 @@ export type ILabelScalarWhereInput = {
   NOT?: Maybe<Array<ILabelScalarWhereInput>>;
   id?: Maybe<IStringFilter>;
   name?: Maybe<IStringFilter>;
-  createdAt?: Maybe<IDateTimeFilter>;
+  createdAt?: Maybe<IDateTimeNullableFilter>;
 };
 
 export type ILabelUpdateManyMutationInput = {
   id?: Maybe<IStringFieldUpdateOperationsInput>;
   name?: Maybe<IStringFieldUpdateOperationsInput>;
-  createdAt?: Maybe<IDateTimeFieldUpdateOperationsInput>;
+  createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
 };
 
 export type ILabelUpsertWithWhereUniqueWithoutTasksInput = {
@@ -1555,7 +1529,7 @@ export type ITaskScalarWhereInput = {
   id?: Maybe<IStringFilter>;
   name?: Maybe<IStringFilter>;
   content?: Maybe<IStringNullableFilter>;
-  createdAt?: Maybe<IDateTimeFilter>;
+  createdAt?: Maybe<IDateTimeNullableFilter>;
   updatedAt?: Maybe<IDateTimeNullableFilter>;
   deletedAt?: Maybe<IDateTimeNullableFilter>;
   archiveAt?: Maybe<IDateTimeNullableFilter>;
@@ -1566,7 +1540,7 @@ export type ITaskUpdateManyMutationInput = {
   id?: Maybe<IStringFieldUpdateOperationsInput>;
   name?: Maybe<IStringFieldUpdateOperationsInput>;
   content?: Maybe<INullableStringFieldUpdateOperationsInput>;
-  createdAt?: Maybe<IDateTimeFieldUpdateOperationsInput>;
+  createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   deletedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   archiveAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
@@ -1594,7 +1568,7 @@ export type IProjectScalarWhereInput = {
   NOT?: Maybe<Array<IProjectScalarWhereInput>>;
   id?: Maybe<IStringFilter>;
   name?: Maybe<IStringFilter>;
-  createdAt?: Maybe<IDateTimeFilter>;
+  createdAt?: Maybe<IDateTimeNullableFilter>;
   updatedAt?: Maybe<IDateTimeNullableFilter>;
   deletedAt?: Maybe<IDateTimeNullableFilter>;
   userId?: Maybe<IStringFilter>;
@@ -1603,7 +1577,7 @@ export type IProjectScalarWhereInput = {
 export type IProjectUpdateManyMutationInput = {
   id?: Maybe<IStringFieldUpdateOperationsInput>;
   name?: Maybe<IStringFieldUpdateOperationsInput>;
-  createdAt?: Maybe<IDateTimeFieldUpdateOperationsInput>;
+  createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   deletedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
 };
@@ -1635,7 +1609,7 @@ export type IProjectUpdateWithWhereUniqueWithoutProjectOwnerInput = {
 export type IProjectUpdateWithoutProjectOwnerInput = {
   id?: Maybe<IStringFieldUpdateOperationsInput>;
   name?: Maybe<IStringFieldUpdateOperationsInput>;
-  createdAt?: Maybe<IDateTimeFieldUpdateOperationsInput>;
+  createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   deletedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   assignUsers?: Maybe<IUserUpdateManyWithoutProjectsInput>;
@@ -1664,7 +1638,7 @@ export type IUserUpdateWithoutProjectsInput = {
   email?: Maybe<IStringFieldUpdateOperationsInput>;
   name?: Maybe<INullableStringFieldUpdateOperationsInput>;
   password?: Maybe<IStringFieldUpdateOperationsInput>;
-  createdAt?: Maybe<IDateTimeFieldUpdateOperationsInput>;
+  createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   deletedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   role?: Maybe<IEnumRoleFieldUpdateOperationsInput>;
@@ -1686,7 +1660,7 @@ export type IUserScalarWhereInput = {
   email?: Maybe<IStringFilter>;
   name?: Maybe<IStringNullableFilter>;
   password?: Maybe<IStringFilter>;
-  createdAt?: Maybe<IDateTimeFilter>;
+  createdAt?: Maybe<IDateTimeNullableFilter>;
   updatedAt?: Maybe<IDateTimeNullableFilter>;
   deletedAt?: Maybe<IDateTimeNullableFilter>;
   role?: Maybe<IEnumRoleFilter>;
@@ -1697,7 +1671,7 @@ export type IUserUpdateManyMutationInput = {
   email?: Maybe<IStringFieldUpdateOperationsInput>;
   name?: Maybe<INullableStringFieldUpdateOperationsInput>;
   password?: Maybe<IStringFieldUpdateOperationsInput>;
-  createdAt?: Maybe<IDateTimeFieldUpdateOperationsInput>;
+  createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   deletedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   role?: Maybe<IEnumRoleFieldUpdateOperationsInput>;
@@ -1754,7 +1728,7 @@ export type IProjectCreateInput = {
 export type IProjectUpdateInput = {
   id?: Maybe<IStringFieldUpdateOperationsInput>;
   name?: Maybe<IStringFieldUpdateOperationsInput>;
-  createdAt?: Maybe<IDateTimeFieldUpdateOperationsInput>;
+  createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   deletedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   projectOwner?: Maybe<IUserUpdateOneRequiredWithoutProjectOwnsInput>;
@@ -1777,7 +1751,7 @@ export type ITaskUpdateInput = {
   id?: Maybe<IStringFieldUpdateOperationsInput>;
   name?: Maybe<IStringFieldUpdateOperationsInput>;
   content?: Maybe<INullableStringFieldUpdateOperationsInput>;
-  createdAt?: Maybe<IDateTimeFieldUpdateOperationsInput>;
+  createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   deletedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   archiveAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
@@ -1805,7 +1779,7 @@ export type IUserUpdateInput = {
   email?: Maybe<IStringFieldUpdateOperationsInput>;
   name?: Maybe<INullableStringFieldUpdateOperationsInput>;
   password?: Maybe<IStringFieldUpdateOperationsInput>;
-  createdAt?: Maybe<IDateTimeFieldUpdateOperationsInput>;
+  createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   deletedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   role?: Maybe<IEnumRoleFieldUpdateOperationsInput>;
@@ -1858,7 +1832,7 @@ export type IWorkspaceUpdateInput = {
   slug?: Maybe<IStringFieldUpdateOperationsInput>;
   description?: Maybe<INullableStringFieldUpdateOperationsInput>;
   image?: Maybe<INullableStringFieldUpdateOperationsInput>;
-  createdAt?: Maybe<IDateTimeFieldUpdateOperationsInput>;
+  createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   deletedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   user?: Maybe<IUserUpdateOneRequiredWithoutWorkspacesInput>;
@@ -1877,7 +1851,7 @@ export type IUserUpdateWithoutWorkspacesInput = {
   email?: Maybe<IStringFieldUpdateOperationsInput>;
   name?: Maybe<INullableStringFieldUpdateOperationsInput>;
   password?: Maybe<IStringFieldUpdateOperationsInput>;
-  createdAt?: Maybe<IDateTimeFieldUpdateOperationsInput>;
+  createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   deletedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   role?: Maybe<IEnumRoleFieldUpdateOperationsInput>;
@@ -1950,7 +1924,7 @@ export type ILabelFeedQuery = (
   { __typename?: 'Query' }
   & { labels: Array<(
     { __typename?: 'Label' }
-    & Pick<ILabel, 'id' | 'name' | 'createdAt'>
+    & Pick<ILabel, 'id' | 'name'>
   )> }
 );
 
@@ -2006,6 +1980,24 @@ export type IUpdateTaskMutation = (
   & { updateTask?: Maybe<(
     { __typename?: 'Task' }
     & Pick<ITask, 'id' | 'name' | 'content' | 'createdAt'>
+  )> }
+);
+
+export type IUpdateTaskLabelMutationVariables = Exact<{
+  updateTask: ITaskUpdateInput;
+  taskWhereInput: ITaskWhereUniqueInput;
+}>;
+
+
+export type IUpdateTaskLabelMutation = (
+  { __typename?: 'Mutation' }
+  & { updateTask?: Maybe<(
+    { __typename?: 'Task' }
+    & Pick<ITask, 'id' | 'name'>
+    & { labels?: Maybe<Array<(
+      { __typename?: 'Label' }
+      & Pick<ILabel, 'id' | 'name'>
+    )>> }
   )> }
 );
 
@@ -2101,7 +2093,6 @@ export const LabelFeedDocument = gql`
   labels {
     id
     name
-    createdAt
   }
 }
     `;
@@ -2270,3 +2261,41 @@ export function useUpdateTaskMutation(baseOptions?: Apollo.MutationHookOptions<I
 export type UpdateTaskMutationHookResult = ReturnType<typeof useUpdateTaskMutation>;
 export type UpdateTaskMutationResult = Apollo.MutationResult<IUpdateTaskMutation>;
 export type UpdateTaskMutationOptions = Apollo.BaseMutationOptions<IUpdateTaskMutation, IUpdateTaskMutationVariables>;
+export const UpdateTaskLabelDocument = gql`
+    mutation UpdateTaskLabel($updateTask: TaskUpdateInput!, $taskWhereInput: TaskWhereUniqueInput!) {
+  updateTask(data: $updateTask, where: $taskWhereInput) {
+    id
+    name
+    labels {
+      id
+      name
+    }
+  }
+}
+    `;
+export type IUpdateTaskLabelMutationFn = Apollo.MutationFunction<IUpdateTaskLabelMutation, IUpdateTaskLabelMutationVariables>;
+
+/**
+ * __useUpdateTaskLabelMutation__
+ *
+ * To run a mutation, you first call `useUpdateTaskLabelMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateTaskLabelMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateTaskLabelMutation, { data, loading, error }] = useUpdateTaskLabelMutation({
+ *   variables: {
+ *      updateTask: // value for 'updateTask'
+ *      taskWhereInput: // value for 'taskWhereInput'
+ *   },
+ * });
+ */
+export function useUpdateTaskLabelMutation(baseOptions?: Apollo.MutationHookOptions<IUpdateTaskLabelMutation, IUpdateTaskLabelMutationVariables>) {
+        return Apollo.useMutation<IUpdateTaskLabelMutation, IUpdateTaskLabelMutationVariables>(UpdateTaskLabelDocument, baseOptions);
+      }
+export type UpdateTaskLabelMutationHookResult = ReturnType<typeof useUpdateTaskLabelMutation>;
+export type UpdateTaskLabelMutationResult = Apollo.MutationResult<IUpdateTaskLabelMutation>;
+export type UpdateTaskLabelMutationOptions = Apollo.BaseMutationOptions<IUpdateTaskLabelMutation, IUpdateTaskLabelMutationVariables>;
