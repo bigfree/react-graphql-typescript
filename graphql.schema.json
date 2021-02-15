@@ -1879,13 +1879,9 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -1955,13 +1951,21 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "assignUserId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -1971,13 +1975,9 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "User",
-                "ofType": null
-              }
+              "kind": "OBJECT",
+              "name": "User",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -2090,6 +2090,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "assignUser",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "User",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -2139,9 +2151,13 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -2203,19 +2219,124 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "Role",
-                "ofType": null
-              }
+              "kind": "ENUM",
+              "name": "Role",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "tasks",
+            "description": null,
+            "args": [
+              {
+                "name": "where",
+                "description": null,
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "TaskWhereInput",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "orderBy",
+                "description": null,
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "TaskOrderByInput",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "cursor",
+                "description": null,
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "TaskWhereUniqueInput",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "take",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "skip",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "distinct",
+                "description": null,
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "TaskScalarFieldEnum",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Task",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "assignTasks",
             "description": null,
             "args": [
               {
@@ -2774,7 +2895,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
+              "name": "StringNullableFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -2858,7 +2979,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
+              "name": "StringNullableFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -2871,6 +2992,30 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "LabelListRelationFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "assignUser",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserRelationFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "assignUserId",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringNullableFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -3941,7 +4086,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "StringNullableFilter",
+              "name": "StringFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -4001,7 +4146,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "EnumRoleFilter",
+              "name": "EnumRoleNullableFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -4010,6 +4155,18 @@
           },
           {
             "name": "tasks",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "TaskListRelationFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "assignTasks",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -4063,7 +4220,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "EnumRoleFilter",
+        "name": "EnumRoleNullableFilter",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -4124,7 +4281,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "NestedEnumRoleFilter",
+              "name": "NestedEnumRoleNullableFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -4138,7 +4295,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "NestedEnumRoleFilter",
+        "name": "NestedEnumRoleNullableFilter",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -4199,7 +4356,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "NestedEnumRoleFilter",
+              "name": "NestedEnumRoleNullableFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -5024,6 +5181,18 @@
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "assignUserId",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "interfaces": null,
@@ -5128,6 +5297,12 @@
           },
           {
             "name": "userId",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "assignUserId",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -6691,6 +6866,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "assignUserId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -6789,6 +6976,18 @@
           },
           {
             "name": "userId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "assignUserId",
             "description": null,
             "args": [],
             "type": {
@@ -8814,13 +9013,9 @@
             "name": "name",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -8890,13 +9085,21 @@
             "name": "user",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "UserCreateOneWithoutTasksInput",
-                "ofType": null
-              }
+              "kind": "INPUT_OBJECT",
+              "name": "UserCreateOneWithoutTasksInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "assignUser",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserCreateOneWithoutAssignTasksInput",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -8992,9 +9195,13 @@
             "name": "name",
             "description": null,
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -9065,6 +9272,18 @@
             "deprecationReason": null
           },
           {
+            "name": "assignTasks",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "TaskCreateManyWithoutAssignUserInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "workspaces",
             "description": null,
             "type": {
@@ -9095,6 +9314,404 @@
               "kind": "INPUT_OBJECT",
               "name": "ProjectCreateManyWithoutProjectOwnerInput",
               "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "TaskCreateManyWithoutAssignUserInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "create",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "TaskCreateWithoutAssignUserInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "connect",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "TaskWhereUniqueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "connectOrCreate",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "TaskCreateOrConnectWithoutassignUserInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "TaskCreateWithoutAssignUserInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "name",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "content",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "createdAt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updatedAt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "deletedAt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "archiveAt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "user",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserCreateOneWithoutTasksInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "labels",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "LabelCreateManyWithoutTasksInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "LabelCreateManyWithoutTasksInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "create",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "LabelCreateWithoutTasksInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "connect",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "LabelWhereUniqueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "connectOrCreate",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "LabelCreateOrConnectWithouttasksInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "LabelCreateWithoutTasksInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "name",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "createdAt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "LabelCreateOrConnectWithouttasksInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "where",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "LabelWhereUniqueInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "create",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "LabelCreateWithoutTasksInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "TaskCreateOrConnectWithoutassignUserInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "where",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "TaskWhereUniqueInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "create",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "TaskCreateWithoutAssignUserInput",
+                "ofType": null
+              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -9581,9 +10198,13 @@
             "name": "name",
             "description": null,
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -9659,6 +10280,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "TaskCreateManyWithoutUserInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "assignTasks",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "TaskCreateManyWithoutAssignUserInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -9787,13 +10420,9 @@
             "name": "name",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -9870,6 +10499,18 @@
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "assignUser",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserCreateOneWithoutAssignTasksInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "interfaces": null,
@@ -9878,7 +10519,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "LabelCreateManyWithoutTasksInput",
+        "name": "UserCreateOneWithoutAssignTasksInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -9886,17 +10527,9 @@
             "name": "create",
             "description": null,
             "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "LabelCreateWithoutTasksInput",
-                  "ofType": null
-                }
-              }
+              "kind": "INPUT_OBJECT",
+              "name": "UserCreateWithoutAssignTasksInput",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -9906,17 +10539,9 @@
             "name": "connect",
             "description": null,
             "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "LabelWhereUniqueInput",
-                  "ofType": null
-                }
-              }
+              "kind": "INPUT_OBJECT",
+              "name": "UserWhereUniqueInput",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -9926,17 +10551,9 @@
             "name": "connectOrCreate",
             "description": null,
             "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "LabelCreateOrConnectWithouttasksInput",
-                  "ofType": null
-                }
-              }
+              "kind": "INPUT_OBJECT",
+              "name": "UserCreateOrConnectWithoutassignTasksInput",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -9949,7 +10566,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "LabelCreateWithoutTasksInput",
+        "name": "UserCreateWithoutAssignTasksInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -9966,7 +10583,39 @@
             "deprecationReason": null
           },
           {
+            "name": "email",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "name",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "password",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -9992,174 +10641,86 @@
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "LabelCreateOrConnectWithouttasksInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
+          },
           {
-            "name": "where",
+            "name": "updatedAt",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "LabelWhereUniqueInput",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "create",
+            "name": "deletedAt",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "LabelCreateWithoutTasksInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "TaskCreateOrConnectWithoutuserInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "where",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "TaskWhereUniqueInput",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "create",
+            "name": "role",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "TaskCreateWithoutUserInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "UserCreateOrConnectWithoutprojectOwnsInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "where",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "UserWhereUniqueInput",
-                "ofType": null
-              }
+              "kind": "ENUM",
+              "name": "Role",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "create",
+            "name": "tasks",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "UserCreateWithoutProjectOwnsInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "ProjectCreateOrConnectWithoutassignUsersInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "where",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "ProjectWhereUniqueInput",
-                "ofType": null
-              }
+              "kind": "INPUT_OBJECT",
+              "name": "TaskCreateManyWithoutUserInput",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "create",
+            "name": "workspaces",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "ProjectCreateWithoutAssignUsersInput",
-                "ofType": null
-              }
+              "kind": "INPUT_OBJECT",
+              "name": "WorkspaceCreateManyWithoutUserInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "projects",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ProjectCreateManyWithoutAssignUsersInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "projectOwns",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ProjectCreateManyWithoutProjectOwnerInput",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -10437,9 +10998,13 @@
             "name": "name",
             "description": null,
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -10515,6 +11080,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "TaskCreateManyWithoutUserInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "assignTasks",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "TaskCreateManyWithoutAssignUserInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -10624,6 +11201,178 @@
               "ofType": {
                 "kind": "INPUT_OBJECT",
                 "name": "ProjectCreateWithoutProjectOwnerInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "UserCreateOrConnectWithoutassignTasksInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "where",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserWhereUniqueInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "create",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserCreateWithoutAssignTasksInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "TaskCreateOrConnectWithoutuserInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "where",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "TaskWhereUniqueInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "create",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "TaskCreateWithoutUserInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "UserCreateOrConnectWithoutprojectOwnsInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "where",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserWhereUniqueInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "create",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserCreateWithoutProjectOwnsInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ProjectCreateOrConnectWithoutassignUsersInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "where",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "ProjectWhereUniqueInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "create",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "ProjectCreateWithoutAssignUsersInput",
                 "ofType": null
               }
             },
@@ -11104,7 +11853,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -11176,7 +11925,19 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "UserUpdateOneRequiredWithoutTasksInput",
+              "name": "UserUpdateOneWithoutTasksInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "assignUser",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserUpdateOneWithoutAssignTasksInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -11213,7 +11974,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "UserUpdateOneRequiredWithoutTasksInput",
+        "name": "UserUpdateOneWithoutTasksInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -11235,6 +11996,30 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "UserWhereUniqueInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "disconnect",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "delete",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
               "ofType": null
             },
             "defaultValue": null,
@@ -11283,6 +12068,16 @@
         "possibleTypes": null
       },
       {
+        "kind": "SCALAR",
+        "name": "Boolean",
+        "description": "The `Boolean` scalar type represents `true` or `false`.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "INPUT_OBJECT",
         "name": "UserUpdateWithoutTasksInput",
         "description": null,
@@ -11317,7 +12112,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "NullableStringFieldUpdateOperationsInput",
+              "name": "StringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -11377,7 +12172,19 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "EnumRoleFieldUpdateOperationsInput",
+              "name": "NullableEnumRoleFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "assignTasks",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "TaskUpdateManyWithoutAssignUserInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -11427,7 +12234,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "EnumRoleFieldUpdateOperationsInput",
+        "name": "NullableEnumRoleFieldUpdateOperationsInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -11438,6 +12245,1312 @@
               "kind": "ENUM",
               "name": "Role",
               "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "TaskUpdateManyWithoutAssignUserInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "create",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "TaskCreateWithoutAssignUserInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "connect",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "TaskWhereUniqueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "set",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "TaskWhereUniqueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "disconnect",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "TaskWhereUniqueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "delete",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "TaskWhereUniqueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "update",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "TaskUpdateWithWhereUniqueWithoutAssignUserInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updateMany",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "TaskUpdateManyWithWhereWithoutAssignUserInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "deleteMany",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "TaskScalarWhereInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "upsert",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "TaskUpsertWithWhereUniqueWithoutAssignUserInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "connectOrCreate",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "TaskCreateOrConnectWithoutassignUserInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "TaskUpdateWithWhereUniqueWithoutAssignUserInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "where",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "TaskWhereUniqueInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "data",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "TaskUpdateWithoutAssignUserInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "TaskUpdateWithoutAssignUserInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "name",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "content",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "createdAt",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableDateTimeFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updatedAt",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableDateTimeFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "deletedAt",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableDateTimeFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "archiveAt",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableDateTimeFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "user",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserUpdateOneWithoutTasksInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "labels",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "LabelUpdateManyWithoutTasksInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "LabelUpdateManyWithoutTasksInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "create",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "LabelCreateWithoutTasksInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "connect",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "LabelWhereUniqueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "set",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "LabelWhereUniqueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "disconnect",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "LabelWhereUniqueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "delete",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "LabelWhereUniqueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "update",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "LabelUpdateWithWhereUniqueWithoutTasksInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updateMany",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "LabelUpdateManyWithWhereWithoutTasksInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "deleteMany",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "LabelScalarWhereInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "upsert",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "LabelUpsertWithWhereUniqueWithoutTasksInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "connectOrCreate",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "LabelCreateOrConnectWithouttasksInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "LabelUpdateWithWhereUniqueWithoutTasksInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "where",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "LabelWhereUniqueInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "data",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "LabelUpdateWithoutTasksInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "LabelUpdateWithoutTasksInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "name",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "createdAt",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableDateTimeFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "LabelUpdateManyWithWhereWithoutTasksInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "where",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "LabelScalarWhereInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "data",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "LabelUpdateManyMutationInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "LabelScalarWhereInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "AND",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "LabelScalarWhereInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "OR",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "LabelScalarWhereInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "NOT",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "LabelScalarWhereInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "name",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "createdAt",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "DateTimeNullableFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "LabelUpdateManyMutationInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "name",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "createdAt",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableDateTimeFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "LabelUpsertWithWhereUniqueWithoutTasksInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "where",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "LabelWhereUniqueInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "update",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "LabelUpdateWithoutTasksInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "create",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "LabelCreateWithoutTasksInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "TaskUpdateManyWithWhereWithoutAssignUserInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "where",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "TaskScalarWhereInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "data",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "TaskUpdateManyMutationInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "TaskScalarWhereInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "AND",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "TaskScalarWhereInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "OR",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "TaskScalarWhereInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "NOT",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "TaskScalarWhereInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "name",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringNullableFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "content",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringNullableFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "createdAt",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "DateTimeNullableFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updatedAt",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "DateTimeNullableFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "deletedAt",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "DateTimeNullableFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "archiveAt",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "DateTimeNullableFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "userId",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringNullableFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "assignUserId",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringNullableFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "TaskUpdateManyMutationInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "name",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "content",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "createdAt",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableDateTimeFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updatedAt",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableDateTimeFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "deletedAt",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableDateTimeFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "archiveAt",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableDateTimeFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "TaskUpsertWithWhereUniqueWithoutAssignUserInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "where",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "TaskWhereUniqueInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "update",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "TaskUpdateWithoutAssignUserInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "create",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "TaskCreateWithoutAssignUserInput",
+                "ofType": null
+              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -12640,7 +14753,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "NullableStringFieldUpdateOperationsInput",
+              "name": "StringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -12700,7 +14813,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "EnumRoleFieldUpdateOperationsInput",
+              "name": "NullableEnumRoleFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -12713,6 +14826,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "TaskUpdateManyWithoutUserInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "assignTasks",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "TaskUpdateManyWithoutAssignUserInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -13025,7 +15150,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -13103,6 +15228,18 @@
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "assignUser",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserUpdateOneWithoutAssignTasksInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "interfaces": null,
@@ -13111,7 +15248,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "LabelUpdateManyWithoutTasksInput",
+        "name": "UserUpdateOneWithoutAssignTasksInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -13119,17 +15256,9 @@
             "name": "create",
             "description": null,
             "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "LabelCreateWithoutTasksInput",
-                  "ofType": null
-                }
-              }
+              "kind": "INPUT_OBJECT",
+              "name": "UserCreateWithoutAssignTasksInput",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -13139,37 +15268,9 @@
             "name": "connect",
             "description": null,
             "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "LabelWhereUniqueInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "set",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "LabelWhereUniqueInput",
-                  "ofType": null
-                }
-              }
+              "kind": "INPUT_OBJECT",
+              "name": "UserWhereUniqueInput",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -13179,17 +15280,9 @@
             "name": "disconnect",
             "description": null,
             "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "LabelWhereUniqueInput",
-                  "ofType": null
-                }
-              }
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -13199,17 +15292,9 @@
             "name": "delete",
             "description": null,
             "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "LabelWhereUniqueInput",
-                  "ofType": null
-                }
-              }
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -13219,57 +15304,9 @@
             "name": "update",
             "description": null,
             "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "LabelUpdateWithWhereUniqueWithoutTasksInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "updateMany",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "LabelUpdateManyWithWhereWithoutTasksInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "deleteMany",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "LabelScalarWhereInput",
-                  "ofType": null
-                }
-              }
+              "kind": "INPUT_OBJECT",
+              "name": "UserUpdateWithoutAssignTasksInput",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -13279,17 +15316,9 @@
             "name": "upsert",
             "description": null,
             "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "LabelUpsertWithWhereUniqueWithoutTasksInput",
-                  "ofType": null
-                }
-              }
+              "kind": "INPUT_OBJECT",
+              "name": "UserUpsertWithoutAssignTasksInput",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -13299,17 +15328,9 @@
             "name": "connectOrCreate",
             "description": null,
             "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "LabelCreateOrConnectWithouttasksInput",
-                  "ofType": null
-                }
-              }
+              "kind": "INPUT_OBJECT",
+              "name": "UserCreateOrConnectWithoutassignTasksInput",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -13322,55 +15343,24 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "LabelUpdateWithWhereUniqueWithoutTasksInput",
+        "name": "UserUpdateWithoutAssignTasksInput",
         "description": null,
         "fields": null,
         "inputFields": [
           {
-            "name": "where",
+            "name": "id",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "LabelWhereUniqueInput",
-                "ofType": null
-              }
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "data",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "LabelUpdateWithoutTasksInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "LabelUpdateWithoutTasksInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "id",
+            "name": "email",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -13394,891 +15384,7 @@
             "deprecationReason": null
           },
           {
-            "name": "createdAt",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NullableDateTimeFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "LabelUpdateManyWithWhereWithoutTasksInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "where",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "LabelScalarWhereInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "data",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "LabelUpdateManyMutationInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "LabelScalarWhereInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "AND",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "LabelScalarWhereInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "OR",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "LabelScalarWhereInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "NOT",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "LabelScalarWhereInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "name",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "createdAt",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "DateTimeNullableFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "LabelUpdateManyMutationInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "name",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "createdAt",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NullableDateTimeFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "LabelUpsertWithWhereUniqueWithoutTasksInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "where",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "LabelWhereUniqueInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "update",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "LabelUpdateWithoutTasksInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "create",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "LabelCreateWithoutTasksInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "TaskUpdateManyWithWhereWithoutUserInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "where",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "TaskScalarWhereInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "data",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "TaskUpdateManyMutationInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "TaskScalarWhereInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "AND",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "TaskScalarWhereInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "OR",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "TaskScalarWhereInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "NOT",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "TaskScalarWhereInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "name",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "content",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringNullableFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "createdAt",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "DateTimeNullableFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "updatedAt",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "DateTimeNullableFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "deletedAt",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "DateTimeNullableFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "archiveAt",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "DateTimeNullableFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "userId",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "TaskUpdateManyMutationInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "name",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "content",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NullableStringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "createdAt",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NullableDateTimeFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "updatedAt",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NullableDateTimeFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "deletedAt",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NullableDateTimeFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "archiveAt",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NullableDateTimeFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "TaskUpsertWithWhereUniqueWithoutUserInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "where",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "TaskWhereUniqueInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "update",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "TaskUpdateWithoutUserInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "create",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "TaskCreateWithoutUserInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "UserUpsertWithoutProjectOwnsInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "update",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "UserUpdateWithoutProjectOwnsInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "create",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "UserCreateWithoutProjectOwnsInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "ProjectUpdateManyWithWhereWithoutAssignUsersInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "where",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "ProjectScalarWhereInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "data",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "ProjectUpdateManyMutationInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "ProjectScalarWhereInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "AND",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "ProjectScalarWhereInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "OR",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "ProjectScalarWhereInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "NOT",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "ProjectScalarWhereInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "name",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "createdAt",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "DateTimeNullableFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "updatedAt",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "DateTimeNullableFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "deletedAt",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "DateTimeNullableFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "userId",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "ProjectUpdateManyMutationInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "name",
+            "name": "password",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -14324,61 +15430,62 @@
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "ProjectUpsertWithWhereUniqueWithoutAssignUsersInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
+          },
           {
-            "name": "where",
+            "name": "role",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "ProjectWhereUniqueInput",
-                "ofType": null
-              }
+              "kind": "INPUT_OBJECT",
+              "name": "NullableEnumRoleFieldUpdateOperationsInput",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "update",
+            "name": "tasks",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "ProjectUpdateWithoutAssignUsersInput",
-                "ofType": null
-              }
+              "kind": "INPUT_OBJECT",
+              "name": "TaskUpdateManyWithoutUserInput",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "create",
+            "name": "workspaces",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "ProjectCreateWithoutAssignUsersInput",
-                "ofType": null
-              }
+              "kind": "INPUT_OBJECT",
+              "name": "WorkspaceUpdateManyWithoutUserInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "projects",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ProjectUpdateManyWithoutAssignUsersInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "projectOwns",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ProjectUpdateManyWithoutProjectOwnerInput",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -15015,7 +16122,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "NullableStringFieldUpdateOperationsInput",
+              "name": "StringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -15075,7 +16182,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "EnumRoleFieldUpdateOperationsInput",
+              "name": "NullableEnumRoleFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -15088,6 +16195,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "TaskUpdateManyWithoutUserInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "assignTasks",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "TaskUpdateManyWithoutAssignUserInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -15261,7 +16380,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "StringNullableFilter",
+              "name": "StringFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -15321,7 +16440,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "EnumRoleFilter",
+              "name": "EnumRoleNullableFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -15368,7 +16487,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "NullableStringFieldUpdateOperationsInput",
+              "name": "StringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -15428,7 +16547,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "EnumRoleFieldUpdateOperationsInput",
+              "name": "NullableEnumRoleFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -15544,6 +16663,220 @@
       },
       {
         "kind": "INPUT_OBJECT",
+        "name": "ProjectScalarWhereInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "AND",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "ProjectScalarWhereInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "OR",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "ProjectScalarWhereInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "NOT",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "ProjectScalarWhereInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "name",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "createdAt",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "DateTimeNullableFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updatedAt",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "DateTimeNullableFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "deletedAt",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "DateTimeNullableFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "userId",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ProjectUpdateManyMutationInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "name",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "createdAt",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableDateTimeFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updatedAt",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableDateTimeFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "deletedAt",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableDateTimeFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
         "name": "ProjectUpsertWithWhereUniqueWithoutProjectOwnerInput",
         "description": null,
         "fields": null,
@@ -15589,6 +16922,296 @@
               "ofType": {
                 "kind": "INPUT_OBJECT",
                 "name": "ProjectCreateWithoutProjectOwnerInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "UserUpsertWithoutAssignTasksInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "update",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserUpdateWithoutAssignTasksInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "create",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserCreateWithoutAssignTasksInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "TaskUpdateManyWithWhereWithoutUserInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "where",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "TaskScalarWhereInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "data",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "TaskUpdateManyMutationInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "TaskUpsertWithWhereUniqueWithoutUserInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "where",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "TaskWhereUniqueInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "update",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "TaskUpdateWithoutUserInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "create",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "TaskCreateWithoutUserInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "UserUpsertWithoutProjectOwnsInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "update",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserUpdateWithoutProjectOwnsInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "create",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserCreateWithoutProjectOwnsInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ProjectUpdateManyWithWhereWithoutAssignUsersInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "where",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "ProjectScalarWhereInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "data",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "ProjectUpdateManyMutationInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ProjectUpsertWithWhereUniqueWithoutAssignUsersInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "where",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "ProjectWhereUniqueInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "update",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "ProjectUpdateWithoutAssignUsersInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "create",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "ProjectCreateWithoutAssignUsersInput",
                 "ofType": null
               }
             },
@@ -15993,13 +17616,9 @@
             "name": "name",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -16069,13 +17688,9 @@
             "name": "user",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "UserCreateOneWithoutTasksInput",
-                "ofType": null
-              }
+              "kind": "INPUT_OBJECT",
+              "name": "UserCreateOneWithoutTasksInput",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -16087,6 +17702,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "LabelCreateManyWithoutTasksInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "assignUser",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserCreateOneWithoutAssignTasksInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -16121,7 +17748,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -16193,7 +17820,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "UserUpdateOneRequiredWithoutTasksInput",
+              "name": "UserUpdateOneWithoutTasksInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -16206,6 +17833,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "LabelUpdateManyWithoutTasksInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "assignUser",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserUpdateOneWithoutAssignTasksInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -16255,9 +17894,13 @@
             "name": "name",
             "description": null,
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -16340,6 +17983,18 @@
             "deprecationReason": null
           },
           {
+            "name": "assignTasks",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "TaskCreateManyWithoutAssignUserInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "workspaces",
             "description": null,
             "type": {
@@ -16415,7 +18070,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "NullableStringFieldUpdateOperationsInput",
+              "name": "StringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -16475,7 +18130,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "EnumRoleFieldUpdateOperationsInput",
+              "name": "NullableEnumRoleFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -16488,6 +18143,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "TaskUpdateManyWithoutUserInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "assignTasks",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "TaskUpdateManyWithoutAssignUserInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -16751,9 +18418,13 @@
             "name": "name",
             "description": null,
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -16829,6 +18500,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "TaskCreateManyWithoutUserInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "assignTasks",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "TaskCreateManyWithoutAssignUserInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -17132,7 +18815,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "NullableStringFieldUpdateOperationsInput",
+              "name": "StringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -17192,7 +18875,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "EnumRoleFieldUpdateOperationsInput",
+              "name": "NullableEnumRoleFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -17205,6 +18888,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "TaskUpdateManyWithoutUserInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "assignTasks",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "TaskUpdateManyWithoutAssignUserInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -17377,16 +19072,6 @@
             "deprecationReason": null
           }
         ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "SCALAR",
-        "name": "Boolean",
-        "description": "The `Boolean` scalar type represents `true` or `false`.",
-        "fields": null,
-        "inputFields": null,
         "interfaces": null,
         "enumValues": null,
         "possibleTypes": null

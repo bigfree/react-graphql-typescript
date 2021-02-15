@@ -1,0 +1,8 @@
+query UserFeed {
+    users {
+        id
+        name
+        email
+        password
+    }
+}

@@ -14,6 +14,8 @@ import {
 } from "../../generated/graphql";
 import DeleteTaskHeaderMenu from "../shared/deleteTaskHeaderMenu";
 import TaskDetailLabels from "../shared/taskDetailLabels";
+import { Editor, EditorState } from 'draft-js';
+import TaskDetailAssignUser from "../shared/taskDetailAssignUser";
 
 type TRouteParams = {
 	id: string
@@ -24,7 +26,8 @@ type TProps = {
 }
 
 type TFormData = {
-	name: string;
+	name: string | null;
+	content: string | null;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -32,7 +35,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 		flexGrow: 0,
 		flexBasis: `450px`,
 		width: `450px`,
-		minWidth: `1px`,
 		borderLeft: `1px solid ${theme.palette.divider}`,
 		display: 'flex',
 		alignItems: 'stretch'
@@ -54,6 +56,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 const TaskDetail: React.FC<TProps> = ({ routeProps }: TProps): JSX.Element => {
 	const styles = useStyles();
 	const [openSnack, setOpenSnack] = useState<boolean>(false);
+	const [editorState, setEditorState] = useState<EditorState>(
+		() => EditorState.createEmpty(),
+	);
 
 	/**
 	 * React form hooks init
@@ -79,7 +84,8 @@ const TaskDetail: React.FC<TProps> = ({ routeProps }: TProps): JSX.Element => {
 		},
 		onCompleted: (data: ITaskDetailQuery) => {
 			reset({
-				name: data.task?.name
+				name: data.task?.name,
+				content: data.task?.content,
 			})
 		}
 	});
@@ -153,6 +159,7 @@ const TaskDetail: React.FC<TProps> = ({ routeProps }: TProps): JSX.Element => {
 				/>
 				<CardContent>
 					<TaskDetailLabels taskData={data}/>
+					<TaskDetailAssignUser taskData={data}/>
 					<form onSubmit={handleSubmit(onSubmit)} autoComplete={`off`}>
 						<Controller
 							name={`name`}
@@ -173,6 +180,19 @@ const TaskDetail: React.FC<TProps> = ({ routeProps }: TProps): JSX.Element => {
 									onBlur={onBlur}
 									label={errors.name ? `Field is required` : `Task name`}
 									className={styles.formControl}
+								/>
+							}
+						/>
+						<Controller
+							name={`content`}
+							control={control}
+							defaultValue={''}
+							render={({ ref }: ControllerRenderProps) =>
+								<Editor
+									ref={ref}
+									editorState={editorState}
+									onChange={setEditorState}
+
 								/>
 							}
 						/>
