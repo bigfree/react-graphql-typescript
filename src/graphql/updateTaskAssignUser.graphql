@@ -1,25 +1,18 @@
-query TaskDetail(
+mutation UpdateTaskAssignUser(
+    $updateTask: TaskUpdateInput!,
     $taskWhereInput: TaskWhereUniqueInput!
 ) {
-    task(
+    updateTask(
+        data: $updateTask,
         where: $taskWhereInput
     ) {
         id
         name
-        content
-        labels {
-            id
-        }
-        userId
-        user {
-            name
-        }
         assignUser {
             id
             name
             email
             password
         }
-        createdAt
     }
 }

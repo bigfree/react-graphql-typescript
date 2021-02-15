@@ -3,11 +3,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Autocomplete } from "@material-ui/lab";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import {
-	ILabel,
 	ITaskDetailQuery,
 	ITaskWhereUniqueInput,
-	useLabelFeedQuery,
-	useUpdateTaskLabelMutation
+	IUser,
+	useUpdateTaskAssignUserMutation,
+	useUserFeedQuery
 } from "../../generated/graphql";
 
 type TProps = {
@@ -20,18 +20,17 @@ const useStyles = makeStyles((theme: Theme) => ({
 	}
 }));
 
-const TaskDetailLabels: React.FC<TProps> = ({ taskData }: TProps): JSX.Element => {
+const TaskDetailAssignUser: React.FC<TProps> = ({ taskData }: TProps): JSX.Element => {
 	const styles = useStyles();
-	const { data: labelsData, loading, error } = useLabelFeedQuery();
-	const [value, setValue] = useState<ILabel[]>([]);
+	const { data: usersData, loading, error } = useUserFeedQuery();
+	const [value, setValue] = useState<IUser | null>(null);
 
-	const [updateTaskLabelMutation] = useUpdateTaskLabelMutation();
+	const [updateTaskAssignUserMutation] = useUpdateTaskAssignUserMutation();
 
 	// Call if change taskData
 	useEffect(() => {
-		// Merge all labels with task labels
-		setValue(labelsData?.labels.filter((n1: ILabel) => taskData?.task?.labels?.some(n2 => n1.id === n2.id)) ?? []);
-	}, [labelsData, taskData]);
+		setValue(taskData?.task?.assignUser ?? null);
+	}, [usersData, taskData]);
 
 	/**
 	 * Task detail where input
@@ -44,24 +43,30 @@ const TaskDetailLabels: React.FC<TProps> = ({ taskData }: TProps): JSX.Element =
 	/**
 	 * Update task labels
 	 * @param {React.ChangeEvent<any>} _event
-	 * @param {ILabel[]} labels
+	 * @param user
 	 */
-	const handleOnChangeAutocomplete = (_event: ChangeEvent<any>, labels: ILabel[]) => {
-		setValue(labels);
-		const labelsIds = labels.map(({ id }: ILabel) => {
-			return {
-				id
-			}
-		});
+	const handleOnChangeAutocomplete = (_event: ChangeEvent<any>, user: IUser | null) => {
+		setValue(user);
 
-		// TODO: Cache data may be lost when replacing the labels field of a Task object.
-		updateTaskLabelMutation({
+		let assignUser;
+
+		if (null === user) {
+			assignUser = {
+				disconnect: false
+			}
+		} else {
+			assignUser = {
+				connect: {
+					id: user.id
+				}
+			}
+		}
+
+		updateTaskAssignUserMutation({
 			variables: {
 				taskWhereInput,
 				updateTask: {
-					labels: {
-						set: labelsIds
-					}
+					assignUser
 				}
 			},
 			refetchQueries: ['task']
@@ -74,17 +79,17 @@ const TaskDetailLabels: React.FC<TProps> = ({ taskData }: TProps): JSX.Element =
 	return (
 		<Box className={styles.root}>
 			<Autocomplete
-				multiple
-				options={labelsData?.labels ?? []}
+				options={usersData?.users ?? []}
 				getOptionLabel={option => option.name}
+				getOptionSelected={(option: IUser, value: IUser) => option.id === value.id}
 				value={value}
 				onChange={handleOnChangeAutocomplete}
 				renderInput={params => (
 					<TextField
 						{...params}
-						placeholder={'Labels'}
+						placeholder={'Users'}
 						variant={'outlined'}
-						label={'Task labels'}
+						label={'Assign user'}
 						fullWidth
 					/>
 				)}
@@ -93,4 +98,4 @@ const TaskDetailLabels: React.FC<TProps> = ({ taskData }: TProps): JSX.Element =
 	)
 }
 
-export default TaskDetailLabels;
+export default TaskDetailAssignUser;

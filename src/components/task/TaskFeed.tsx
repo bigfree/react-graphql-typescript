@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 		flexGrow: 1,
 		padding: theme.spacing(2, 2, 2, 2),
 		overflow: 'auto',
+		minWidth: `1px`,
 	},
 	paper: {
 		width: '100%',

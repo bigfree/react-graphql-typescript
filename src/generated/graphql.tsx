@@ -231,15 +231,17 @@ export type ILabelTasksArgs = {
 export type ITask = {
   __typename?: 'Task';
   id: Scalars['String'];
-  name: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
   content?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   deletedAt?: Maybe<Scalars['DateTime']>;
   archiveAt?: Maybe<Scalars['DateTime']>;
-  userId: Scalars['String'];
-  user: IUser;
+  userId?: Maybe<Scalars['String']>;
+  assignUserId?: Maybe<Scalars['String']>;
+  user?: Maybe<IUser>;
   labels?: Maybe<Array<ILabel>>;
+  assignUser?: Maybe<IUser>;
 };
 
 
@@ -256,13 +258,14 @@ export type IUser = {
   __typename?: 'User';
   id: Scalars['String'];
   email: Scalars['String'];
-  name?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
   password: Scalars['String'];
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   deletedAt?: Maybe<Scalars['DateTime']>;
-  role: IRole;
+  role?: Maybe<IRole>;
   tasks?: Maybe<Array<ITask>>;
+  assignTasks?: Maybe<Array<ITask>>;
   workspaces?: Maybe<Array<IWorkspace>>;
   projects?: Maybe<Array<IProject>>;
   projectOwns?: Maybe<Array<IProject>>;
@@ -270,6 +273,16 @@ export type IUser = {
 
 
 export type IUserTasksArgs = {
+  where?: Maybe<ITaskWhereInput>;
+  orderBy?: Maybe<Array<ITaskOrderByInput>>;
+  cursor?: Maybe<ITaskWhereUniqueInput>;
+  take?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
+  distinct?: Maybe<Array<ITaskScalarFieldEnum>>;
+};
+
+
+export type IUserAssignTasksArgs = {
   where?: Maybe<ITaskWhereInput>;
   orderBy?: Maybe<Array<ITaskOrderByInput>>;
   cursor?: Maybe<ITaskWhereUniqueInput>;
@@ -320,15 +333,17 @@ export type ITaskWhereInput = {
   OR?: Maybe<Array<ITaskWhereInput>>;
   NOT?: Maybe<Array<ITaskWhereInput>>;
   id?: Maybe<IStringFilter>;
-  name?: Maybe<IStringFilter>;
+  name?: Maybe<IStringNullableFilter>;
   content?: Maybe<IStringNullableFilter>;
   createdAt?: Maybe<IDateTimeNullableFilter>;
   updatedAt?: Maybe<IDateTimeNullableFilter>;
   deletedAt?: Maybe<IDateTimeNullableFilter>;
   archiveAt?: Maybe<IDateTimeNullableFilter>;
   user?: Maybe<IUserRelationFilter>;
-  userId?: Maybe<IStringFilter>;
+  userId?: Maybe<IStringNullableFilter>;
   labels?: Maybe<ILabelListRelationFilter>;
+  assignUser?: Maybe<IUserRelationFilter>;
+  assignUserId?: Maybe<IStringNullableFilter>;
 };
 
 export type IStringFilter = {
@@ -427,30 +442,31 @@ export type IUserWhereInput = {
   NOT?: Maybe<Array<IUserWhereInput>>;
   id?: Maybe<IStringFilter>;
   email?: Maybe<IStringFilter>;
-  name?: Maybe<IStringNullableFilter>;
+  name?: Maybe<IStringFilter>;
   password?: Maybe<IStringFilter>;
   createdAt?: Maybe<IDateTimeNullableFilter>;
   updatedAt?: Maybe<IDateTimeNullableFilter>;
   deletedAt?: Maybe<IDateTimeNullableFilter>;
-  role?: Maybe<IEnumRoleFilter>;
+  role?: Maybe<IEnumRoleNullableFilter>;
   tasks?: Maybe<ITaskListRelationFilter>;
+  assignTasks?: Maybe<ITaskListRelationFilter>;
   workspaces?: Maybe<IWorkspaceListRelationFilter>;
   projects?: Maybe<IProjectListRelationFilter>;
   projectOwns?: Maybe<IProjectListRelationFilter>;
 };
 
-export type IEnumRoleFilter = {
+export type IEnumRoleNullableFilter = {
   equals?: Maybe<IRole>;
   in?: Maybe<Array<IRole>>;
   notIn?: Maybe<Array<IRole>>;
-  not?: Maybe<INestedEnumRoleFilter>;
+  not?: Maybe<INestedEnumRoleNullableFilter>;
 };
 
-export type INestedEnumRoleFilter = {
+export type INestedEnumRoleNullableFilter = {
   equals?: Maybe<IRole>;
   in?: Maybe<Array<IRole>>;
   notIn?: Maybe<Array<IRole>>;
-  not?: Maybe<INestedEnumRoleFilter>;
+  not?: Maybe<INestedEnumRoleNullableFilter>;
 };
 
 export type ITaskListRelationFilter = {
@@ -532,6 +548,7 @@ export type ITaskOrderByInput = {
   deletedAt?: Maybe<ISortOrder>;
   archiveAt?: Maybe<ISortOrder>;
   userId?: Maybe<ISortOrder>;
+  assignUserId?: Maybe<ISortOrder>;
 };
 
 export enum ISortOrder {
@@ -551,7 +568,8 @@ export enum ITaskScalarFieldEnum {
   UpdatedAt = 'updatedAt',
   DeletedAt = 'deletedAt',
   ArchiveAt = 'archiveAt',
-  UserId = 'userId'
+  UserId = 'userId',
+  AssignUserId = 'assignUserId'
 }
 
 export type IWorkspace = {
@@ -750,6 +768,7 @@ export type ITaskMinAggregate = {
   deletedAt?: Maybe<Scalars['DateTime']>;
   archiveAt?: Maybe<Scalars['DateTime']>;
   userId?: Maybe<Scalars['String']>;
+  assignUserId?: Maybe<Scalars['String']>;
 };
 
 export type ITaskMaxAggregate = {
@@ -762,6 +781,7 @@ export type ITaskMaxAggregate = {
   deletedAt?: Maybe<Scalars['DateTime']>;
   archiveAt?: Maybe<Scalars['DateTime']>;
   userId?: Maybe<Scalars['String']>;
+  assignUserId?: Maybe<Scalars['String']>;
 };
 
 export type IAggregateUser = {
@@ -1059,13 +1079,14 @@ export type ITaskCreateManyWithoutLabelsInput = {
 
 export type ITaskCreateWithoutLabelsInput = {
   id?: Maybe<Scalars['String']>;
-  name: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
   content?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   deletedAt?: Maybe<Scalars['DateTime']>;
   archiveAt?: Maybe<Scalars['DateTime']>;
-  user: IUserCreateOneWithoutTasksInput;
+  user?: Maybe<IUserCreateOneWithoutTasksInput>;
+  assignUser?: Maybe<IUserCreateOneWithoutAssignTasksInput>;
 };
 
 export type IUserCreateOneWithoutTasksInput = {
@@ -1077,15 +1098,56 @@ export type IUserCreateOneWithoutTasksInput = {
 export type IUserCreateWithoutTasksInput = {
   id?: Maybe<Scalars['String']>;
   email: Scalars['String'];
-  name?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
   password: Scalars['String'];
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   deletedAt?: Maybe<Scalars['DateTime']>;
   role?: Maybe<IRole>;
+  assignTasks?: Maybe<ITaskCreateManyWithoutAssignUserInput>;
   workspaces?: Maybe<IWorkspaceCreateManyWithoutUserInput>;
   projects?: Maybe<IProjectCreateManyWithoutAssignUsersInput>;
   projectOwns?: Maybe<IProjectCreateManyWithoutProjectOwnerInput>;
+};
+
+export type ITaskCreateManyWithoutAssignUserInput = {
+  create?: Maybe<Array<ITaskCreateWithoutAssignUserInput>>;
+  connect?: Maybe<Array<ITaskWhereUniqueInput>>;
+  connectOrCreate?: Maybe<Array<ITaskCreateOrConnectWithoutassignUserInput>>;
+};
+
+export type ITaskCreateWithoutAssignUserInput = {
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  content?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  deletedAt?: Maybe<Scalars['DateTime']>;
+  archiveAt?: Maybe<Scalars['DateTime']>;
+  user?: Maybe<IUserCreateOneWithoutTasksInput>;
+  labels?: Maybe<ILabelCreateManyWithoutTasksInput>;
+};
+
+export type ILabelCreateManyWithoutTasksInput = {
+  create?: Maybe<Array<ILabelCreateWithoutTasksInput>>;
+  connect?: Maybe<Array<ILabelWhereUniqueInput>>;
+  connectOrCreate?: Maybe<Array<ILabelCreateOrConnectWithouttasksInput>>;
+};
+
+export type ILabelCreateWithoutTasksInput = {
+  id?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+  createdAt?: Maybe<Scalars['DateTime']>;
+};
+
+export type ILabelCreateOrConnectWithouttasksInput = {
+  where: ILabelWhereUniqueInput;
+  create: ILabelCreateWithoutTasksInput;
+};
+
+export type ITaskCreateOrConnectWithoutassignUserInput = {
+  where: ITaskWhereUniqueInput;
+  create: ITaskCreateWithoutAssignUserInput;
 };
 
 export type IWorkspaceCreateManyWithoutUserInput = {
@@ -1134,13 +1196,14 @@ export type IUserCreateOneWithoutProjectOwnsInput = {
 export type IUserCreateWithoutProjectOwnsInput = {
   id?: Maybe<Scalars['String']>;
   email: Scalars['String'];
-  name?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
   password: Scalars['String'];
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   deletedAt?: Maybe<Scalars['DateTime']>;
   role?: Maybe<IRole>;
   tasks?: Maybe<ITaskCreateManyWithoutUserInput>;
+  assignTasks?: Maybe<ITaskCreateManyWithoutAssignUserInput>;
   workspaces?: Maybe<IWorkspaceCreateManyWithoutUserInput>;
   projects?: Maybe<IProjectCreateManyWithoutAssignUsersInput>;
 };
@@ -1153,45 +1216,35 @@ export type ITaskCreateManyWithoutUserInput = {
 
 export type ITaskCreateWithoutUserInput = {
   id?: Maybe<Scalars['String']>;
-  name: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
   content?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   deletedAt?: Maybe<Scalars['DateTime']>;
   archiveAt?: Maybe<Scalars['DateTime']>;
   labels?: Maybe<ILabelCreateManyWithoutTasksInput>;
+  assignUser?: Maybe<IUserCreateOneWithoutAssignTasksInput>;
 };
 
-export type ILabelCreateManyWithoutTasksInput = {
-  create?: Maybe<Array<ILabelCreateWithoutTasksInput>>;
-  connect?: Maybe<Array<ILabelWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<ILabelCreateOrConnectWithouttasksInput>>;
+export type IUserCreateOneWithoutAssignTasksInput = {
+  create?: Maybe<IUserCreateWithoutAssignTasksInput>;
+  connect?: Maybe<IUserWhereUniqueInput>;
+  connectOrCreate?: Maybe<IUserCreateOrConnectWithoutassignTasksInput>;
 };
 
-export type ILabelCreateWithoutTasksInput = {
+export type IUserCreateWithoutAssignTasksInput = {
   id?: Maybe<Scalars['String']>;
+  email: Scalars['String'];
   name: Scalars['String'];
+  password: Scalars['String'];
   createdAt?: Maybe<Scalars['DateTime']>;
-};
-
-export type ILabelCreateOrConnectWithouttasksInput = {
-  where: ILabelWhereUniqueInput;
-  create: ILabelCreateWithoutTasksInput;
-};
-
-export type ITaskCreateOrConnectWithoutuserInput = {
-  where: ITaskWhereUniqueInput;
-  create: ITaskCreateWithoutUserInput;
-};
-
-export type IUserCreateOrConnectWithoutprojectOwnsInput = {
-  where: IUserWhereUniqueInput;
-  create: IUserCreateWithoutProjectOwnsInput;
-};
-
-export type IProjectCreateOrConnectWithoutassignUsersInput = {
-  where: IProjectWhereUniqueInput;
-  create: IProjectCreateWithoutAssignUsersInput;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  deletedAt?: Maybe<Scalars['DateTime']>;
+  role?: Maybe<IRole>;
+  tasks?: Maybe<ITaskCreateManyWithoutUserInput>;
+  workspaces?: Maybe<IWorkspaceCreateManyWithoutUserInput>;
+  projects?: Maybe<IProjectCreateManyWithoutAssignUsersInput>;
+  projectOwns?: Maybe<IProjectCreateManyWithoutProjectOwnerInput>;
 };
 
 export type IProjectCreateManyWithoutProjectOwnerInput = {
@@ -1218,13 +1271,14 @@ export type IUserCreateManyWithoutProjectsInput = {
 export type IUserCreateWithoutProjectsInput = {
   id?: Maybe<Scalars['String']>;
   email: Scalars['String'];
-  name?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
   password: Scalars['String'];
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   deletedAt?: Maybe<Scalars['DateTime']>;
   role?: Maybe<IRole>;
   tasks?: Maybe<ITaskCreateManyWithoutUserInput>;
+  assignTasks?: Maybe<ITaskCreateManyWithoutAssignUserInput>;
   workspaces?: Maybe<IWorkspaceCreateManyWithoutUserInput>;
   projectOwns?: Maybe<IProjectCreateManyWithoutProjectOwnerInput>;
 };
@@ -1237,6 +1291,26 @@ export type IUserCreateOrConnectWithoutprojectsInput = {
 export type IProjectCreateOrConnectWithoutprojectOwnerInput = {
   where: IProjectWhereUniqueInput;
   create: IProjectCreateWithoutProjectOwnerInput;
+};
+
+export type IUserCreateOrConnectWithoutassignTasksInput = {
+  where: IUserWhereUniqueInput;
+  create: IUserCreateWithoutAssignTasksInput;
+};
+
+export type ITaskCreateOrConnectWithoutuserInput = {
+  where: ITaskWhereUniqueInput;
+  create: ITaskCreateWithoutUserInput;
+};
+
+export type IUserCreateOrConnectWithoutprojectOwnsInput = {
+  where: IUserWhereUniqueInput;
+  create: IUserCreateWithoutProjectOwnsInput;
+};
+
+export type IProjectCreateOrConnectWithoutassignUsersInput = {
+  where: IProjectWhereUniqueInput;
+  create: IProjectCreateWithoutAssignUsersInput;
 };
 
 export type IUserCreateOrConnectWithouttasksInput = {
@@ -1284,22 +1358,25 @@ export type ITaskUpdateWithWhereUniqueWithoutLabelsInput = {
 
 export type ITaskUpdateWithoutLabelsInput = {
   id?: Maybe<IStringFieldUpdateOperationsInput>;
-  name?: Maybe<IStringFieldUpdateOperationsInput>;
+  name?: Maybe<INullableStringFieldUpdateOperationsInput>;
   content?: Maybe<INullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   deletedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   archiveAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
-  user?: Maybe<IUserUpdateOneRequiredWithoutTasksInput>;
+  user?: Maybe<IUserUpdateOneWithoutTasksInput>;
+  assignUser?: Maybe<IUserUpdateOneWithoutAssignTasksInput>;
 };
 
 export type INullableStringFieldUpdateOperationsInput = {
   set?: Maybe<Scalars['String']>;
 };
 
-export type IUserUpdateOneRequiredWithoutTasksInput = {
+export type IUserUpdateOneWithoutTasksInput = {
   create?: Maybe<IUserCreateWithoutTasksInput>;
   connect?: Maybe<IUserWhereUniqueInput>;
+  disconnect?: Maybe<Scalars['Boolean']>;
+  delete?: Maybe<Scalars['Boolean']>;
   update?: Maybe<IUserUpdateWithoutTasksInput>;
   upsert?: Maybe<IUserUpsertWithoutTasksInput>;
   connectOrCreate?: Maybe<IUserCreateOrConnectWithouttasksInput>;
@@ -1308,19 +1385,136 @@ export type IUserUpdateOneRequiredWithoutTasksInput = {
 export type IUserUpdateWithoutTasksInput = {
   id?: Maybe<IStringFieldUpdateOperationsInput>;
   email?: Maybe<IStringFieldUpdateOperationsInput>;
-  name?: Maybe<INullableStringFieldUpdateOperationsInput>;
+  name?: Maybe<IStringFieldUpdateOperationsInput>;
   password?: Maybe<IStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   deletedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
-  role?: Maybe<IEnumRoleFieldUpdateOperationsInput>;
+  role?: Maybe<INullableEnumRoleFieldUpdateOperationsInput>;
+  assignTasks?: Maybe<ITaskUpdateManyWithoutAssignUserInput>;
   workspaces?: Maybe<IWorkspaceUpdateManyWithoutUserInput>;
   projects?: Maybe<IProjectUpdateManyWithoutAssignUsersInput>;
   projectOwns?: Maybe<IProjectUpdateManyWithoutProjectOwnerInput>;
 };
 
-export type IEnumRoleFieldUpdateOperationsInput = {
+export type INullableEnumRoleFieldUpdateOperationsInput = {
   set?: Maybe<IRole>;
+};
+
+export type ITaskUpdateManyWithoutAssignUserInput = {
+  create?: Maybe<Array<ITaskCreateWithoutAssignUserInput>>;
+  connect?: Maybe<Array<ITaskWhereUniqueInput>>;
+  set?: Maybe<Array<ITaskWhereUniqueInput>>;
+  disconnect?: Maybe<Array<ITaskWhereUniqueInput>>;
+  delete?: Maybe<Array<ITaskWhereUniqueInput>>;
+  update?: Maybe<Array<ITaskUpdateWithWhereUniqueWithoutAssignUserInput>>;
+  updateMany?: Maybe<Array<ITaskUpdateManyWithWhereWithoutAssignUserInput>>;
+  deleteMany?: Maybe<Array<ITaskScalarWhereInput>>;
+  upsert?: Maybe<Array<ITaskUpsertWithWhereUniqueWithoutAssignUserInput>>;
+  connectOrCreate?: Maybe<Array<ITaskCreateOrConnectWithoutassignUserInput>>;
+};
+
+export type ITaskUpdateWithWhereUniqueWithoutAssignUserInput = {
+  where: ITaskWhereUniqueInput;
+  data: ITaskUpdateWithoutAssignUserInput;
+};
+
+export type ITaskUpdateWithoutAssignUserInput = {
+  id?: Maybe<IStringFieldUpdateOperationsInput>;
+  name?: Maybe<INullableStringFieldUpdateOperationsInput>;
+  content?: Maybe<INullableStringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
+  deletedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
+  archiveAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
+  user?: Maybe<IUserUpdateOneWithoutTasksInput>;
+  labels?: Maybe<ILabelUpdateManyWithoutTasksInput>;
+};
+
+export type ILabelUpdateManyWithoutTasksInput = {
+  create?: Maybe<Array<ILabelCreateWithoutTasksInput>>;
+  connect?: Maybe<Array<ILabelWhereUniqueInput>>;
+  set?: Maybe<Array<ILabelWhereUniqueInput>>;
+  disconnect?: Maybe<Array<ILabelWhereUniqueInput>>;
+  delete?: Maybe<Array<ILabelWhereUniqueInput>>;
+  update?: Maybe<Array<ILabelUpdateWithWhereUniqueWithoutTasksInput>>;
+  updateMany?: Maybe<Array<ILabelUpdateManyWithWhereWithoutTasksInput>>;
+  deleteMany?: Maybe<Array<ILabelScalarWhereInput>>;
+  upsert?: Maybe<Array<ILabelUpsertWithWhereUniqueWithoutTasksInput>>;
+  connectOrCreate?: Maybe<Array<ILabelCreateOrConnectWithouttasksInput>>;
+};
+
+export type ILabelUpdateWithWhereUniqueWithoutTasksInput = {
+  where: ILabelWhereUniqueInput;
+  data: ILabelUpdateWithoutTasksInput;
+};
+
+export type ILabelUpdateWithoutTasksInput = {
+  id?: Maybe<IStringFieldUpdateOperationsInput>;
+  name?: Maybe<IStringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
+};
+
+export type ILabelUpdateManyWithWhereWithoutTasksInput = {
+  where: ILabelScalarWhereInput;
+  data: ILabelUpdateManyMutationInput;
+};
+
+export type ILabelScalarWhereInput = {
+  AND?: Maybe<Array<ILabelScalarWhereInput>>;
+  OR?: Maybe<Array<ILabelScalarWhereInput>>;
+  NOT?: Maybe<Array<ILabelScalarWhereInput>>;
+  id?: Maybe<IStringFilter>;
+  name?: Maybe<IStringFilter>;
+  createdAt?: Maybe<IDateTimeNullableFilter>;
+};
+
+export type ILabelUpdateManyMutationInput = {
+  id?: Maybe<IStringFieldUpdateOperationsInput>;
+  name?: Maybe<IStringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
+};
+
+export type ILabelUpsertWithWhereUniqueWithoutTasksInput = {
+  where: ILabelWhereUniqueInput;
+  update: ILabelUpdateWithoutTasksInput;
+  create: ILabelCreateWithoutTasksInput;
+};
+
+export type ITaskUpdateManyWithWhereWithoutAssignUserInput = {
+  where: ITaskScalarWhereInput;
+  data: ITaskUpdateManyMutationInput;
+};
+
+export type ITaskScalarWhereInput = {
+  AND?: Maybe<Array<ITaskScalarWhereInput>>;
+  OR?: Maybe<Array<ITaskScalarWhereInput>>;
+  NOT?: Maybe<Array<ITaskScalarWhereInput>>;
+  id?: Maybe<IStringFilter>;
+  name?: Maybe<IStringNullableFilter>;
+  content?: Maybe<IStringNullableFilter>;
+  createdAt?: Maybe<IDateTimeNullableFilter>;
+  updatedAt?: Maybe<IDateTimeNullableFilter>;
+  deletedAt?: Maybe<IDateTimeNullableFilter>;
+  archiveAt?: Maybe<IDateTimeNullableFilter>;
+  userId?: Maybe<IStringNullableFilter>;
+  assignUserId?: Maybe<IStringNullableFilter>;
+};
+
+export type ITaskUpdateManyMutationInput = {
+  id?: Maybe<IStringFieldUpdateOperationsInput>;
+  name?: Maybe<INullableStringFieldUpdateOperationsInput>;
+  content?: Maybe<INullableStringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
+  deletedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
+  archiveAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
+};
+
+export type ITaskUpsertWithWhereUniqueWithoutAssignUserInput = {
+  where: ITaskWhereUniqueInput;
+  update: ITaskUpdateWithoutAssignUserInput;
+  create: ITaskCreateWithoutAssignUserInput;
 };
 
 export type IWorkspaceUpdateManyWithoutUserInput = {
@@ -1427,13 +1621,14 @@ export type IUserUpdateOneRequiredWithoutProjectOwnsInput = {
 export type IUserUpdateWithoutProjectOwnsInput = {
   id?: Maybe<IStringFieldUpdateOperationsInput>;
   email?: Maybe<IStringFieldUpdateOperationsInput>;
-  name?: Maybe<INullableStringFieldUpdateOperationsInput>;
+  name?: Maybe<IStringFieldUpdateOperationsInput>;
   password?: Maybe<IStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   deletedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
-  role?: Maybe<IEnumRoleFieldUpdateOperationsInput>;
+  role?: Maybe<INullableEnumRoleFieldUpdateOperationsInput>;
   tasks?: Maybe<ITaskUpdateManyWithoutUserInput>;
+  assignTasks?: Maybe<ITaskUpdateManyWithoutAssignUserInput>;
   workspaces?: Maybe<IWorkspaceUpdateManyWithoutUserInput>;
   projects?: Maybe<IProjectUpdateManyWithoutAssignUsersInput>;
 };
@@ -1458,134 +1653,39 @@ export type ITaskUpdateWithWhereUniqueWithoutUserInput = {
 
 export type ITaskUpdateWithoutUserInput = {
   id?: Maybe<IStringFieldUpdateOperationsInput>;
-  name?: Maybe<IStringFieldUpdateOperationsInput>;
+  name?: Maybe<INullableStringFieldUpdateOperationsInput>;
   content?: Maybe<INullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   deletedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   archiveAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   labels?: Maybe<ILabelUpdateManyWithoutTasksInput>;
+  assignUser?: Maybe<IUserUpdateOneWithoutAssignTasksInput>;
 };
 
-export type ILabelUpdateManyWithoutTasksInput = {
-  create?: Maybe<Array<ILabelCreateWithoutTasksInput>>;
-  connect?: Maybe<Array<ILabelWhereUniqueInput>>;
-  set?: Maybe<Array<ILabelWhereUniqueInput>>;
-  disconnect?: Maybe<Array<ILabelWhereUniqueInput>>;
-  delete?: Maybe<Array<ILabelWhereUniqueInput>>;
-  update?: Maybe<Array<ILabelUpdateWithWhereUniqueWithoutTasksInput>>;
-  updateMany?: Maybe<Array<ILabelUpdateManyWithWhereWithoutTasksInput>>;
-  deleteMany?: Maybe<Array<ILabelScalarWhereInput>>;
-  upsert?: Maybe<Array<ILabelUpsertWithWhereUniqueWithoutTasksInput>>;
-  connectOrCreate?: Maybe<Array<ILabelCreateOrConnectWithouttasksInput>>;
+export type IUserUpdateOneWithoutAssignTasksInput = {
+  create?: Maybe<IUserCreateWithoutAssignTasksInput>;
+  connect?: Maybe<IUserWhereUniqueInput>;
+  disconnect?: Maybe<Scalars['Boolean']>;
+  delete?: Maybe<Scalars['Boolean']>;
+  update?: Maybe<IUserUpdateWithoutAssignTasksInput>;
+  upsert?: Maybe<IUserUpsertWithoutAssignTasksInput>;
+  connectOrCreate?: Maybe<IUserCreateOrConnectWithoutassignTasksInput>;
 };
 
-export type ILabelUpdateWithWhereUniqueWithoutTasksInput = {
-  where: ILabelWhereUniqueInput;
-  data: ILabelUpdateWithoutTasksInput;
-};
-
-export type ILabelUpdateWithoutTasksInput = {
+export type IUserUpdateWithoutAssignTasksInput = {
   id?: Maybe<IStringFieldUpdateOperationsInput>;
+  email?: Maybe<IStringFieldUpdateOperationsInput>;
   name?: Maybe<IStringFieldUpdateOperationsInput>;
-  createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
-};
-
-export type ILabelUpdateManyWithWhereWithoutTasksInput = {
-  where: ILabelScalarWhereInput;
-  data: ILabelUpdateManyMutationInput;
-};
-
-export type ILabelScalarWhereInput = {
-  AND?: Maybe<Array<ILabelScalarWhereInput>>;
-  OR?: Maybe<Array<ILabelScalarWhereInput>>;
-  NOT?: Maybe<Array<ILabelScalarWhereInput>>;
-  id?: Maybe<IStringFilter>;
-  name?: Maybe<IStringFilter>;
-  createdAt?: Maybe<IDateTimeNullableFilter>;
-};
-
-export type ILabelUpdateManyMutationInput = {
-  id?: Maybe<IStringFieldUpdateOperationsInput>;
-  name?: Maybe<IStringFieldUpdateOperationsInput>;
-  createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
-};
-
-export type ILabelUpsertWithWhereUniqueWithoutTasksInput = {
-  where: ILabelWhereUniqueInput;
-  update: ILabelUpdateWithoutTasksInput;
-  create: ILabelCreateWithoutTasksInput;
-};
-
-export type ITaskUpdateManyWithWhereWithoutUserInput = {
-  where: ITaskScalarWhereInput;
-  data: ITaskUpdateManyMutationInput;
-};
-
-export type ITaskScalarWhereInput = {
-  AND?: Maybe<Array<ITaskScalarWhereInput>>;
-  OR?: Maybe<Array<ITaskScalarWhereInput>>;
-  NOT?: Maybe<Array<ITaskScalarWhereInput>>;
-  id?: Maybe<IStringFilter>;
-  name?: Maybe<IStringFilter>;
-  content?: Maybe<IStringNullableFilter>;
-  createdAt?: Maybe<IDateTimeNullableFilter>;
-  updatedAt?: Maybe<IDateTimeNullableFilter>;
-  deletedAt?: Maybe<IDateTimeNullableFilter>;
-  archiveAt?: Maybe<IDateTimeNullableFilter>;
-  userId?: Maybe<IStringFilter>;
-};
-
-export type ITaskUpdateManyMutationInput = {
-  id?: Maybe<IStringFieldUpdateOperationsInput>;
-  name?: Maybe<IStringFieldUpdateOperationsInput>;
-  content?: Maybe<INullableStringFieldUpdateOperationsInput>;
+  password?: Maybe<IStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   deletedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
-  archiveAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
-};
-
-export type ITaskUpsertWithWhereUniqueWithoutUserInput = {
-  where: ITaskWhereUniqueInput;
-  update: ITaskUpdateWithoutUserInput;
-  create: ITaskCreateWithoutUserInput;
-};
-
-export type IUserUpsertWithoutProjectOwnsInput = {
-  update: IUserUpdateWithoutProjectOwnsInput;
-  create: IUserCreateWithoutProjectOwnsInput;
-};
-
-export type IProjectUpdateManyWithWhereWithoutAssignUsersInput = {
-  where: IProjectScalarWhereInput;
-  data: IProjectUpdateManyMutationInput;
-};
-
-export type IProjectScalarWhereInput = {
-  AND?: Maybe<Array<IProjectScalarWhereInput>>;
-  OR?: Maybe<Array<IProjectScalarWhereInput>>;
-  NOT?: Maybe<Array<IProjectScalarWhereInput>>;
-  id?: Maybe<IStringFilter>;
-  name?: Maybe<IStringFilter>;
-  createdAt?: Maybe<IDateTimeNullableFilter>;
-  updatedAt?: Maybe<IDateTimeNullableFilter>;
-  deletedAt?: Maybe<IDateTimeNullableFilter>;
-  userId?: Maybe<IStringFilter>;
-};
-
-export type IProjectUpdateManyMutationInput = {
-  id?: Maybe<IStringFieldUpdateOperationsInput>;
-  name?: Maybe<IStringFieldUpdateOperationsInput>;
-  createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
-  updatedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
-  deletedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
-};
-
-export type IProjectUpsertWithWhereUniqueWithoutAssignUsersInput = {
-  where: IProjectWhereUniqueInput;
-  update: IProjectUpdateWithoutAssignUsersInput;
-  create: IProjectCreateWithoutAssignUsersInput;
+  role?: Maybe<INullableEnumRoleFieldUpdateOperationsInput>;
+  tasks?: Maybe<ITaskUpdateManyWithoutUserInput>;
+  workspaces?: Maybe<IWorkspaceUpdateManyWithoutUserInput>;
+  projects?: Maybe<IProjectUpdateManyWithoutAssignUsersInput>;
+  projectOwns?: Maybe<IProjectUpdateManyWithoutProjectOwnerInput>;
 };
 
 export type IProjectUpdateManyWithoutProjectOwnerInput = {
@@ -1636,13 +1736,14 @@ export type IUserUpdateWithWhereUniqueWithoutProjectsInput = {
 export type IUserUpdateWithoutProjectsInput = {
   id?: Maybe<IStringFieldUpdateOperationsInput>;
   email?: Maybe<IStringFieldUpdateOperationsInput>;
-  name?: Maybe<INullableStringFieldUpdateOperationsInput>;
+  name?: Maybe<IStringFieldUpdateOperationsInput>;
   password?: Maybe<IStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   deletedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
-  role?: Maybe<IEnumRoleFieldUpdateOperationsInput>;
+  role?: Maybe<INullableEnumRoleFieldUpdateOperationsInput>;
   tasks?: Maybe<ITaskUpdateManyWithoutUserInput>;
+  assignTasks?: Maybe<ITaskUpdateManyWithoutAssignUserInput>;
   workspaces?: Maybe<IWorkspaceUpdateManyWithoutUserInput>;
   projectOwns?: Maybe<IProjectUpdateManyWithoutProjectOwnerInput>;
 };
@@ -1658,23 +1759,23 @@ export type IUserScalarWhereInput = {
   NOT?: Maybe<Array<IUserScalarWhereInput>>;
   id?: Maybe<IStringFilter>;
   email?: Maybe<IStringFilter>;
-  name?: Maybe<IStringNullableFilter>;
+  name?: Maybe<IStringFilter>;
   password?: Maybe<IStringFilter>;
   createdAt?: Maybe<IDateTimeNullableFilter>;
   updatedAt?: Maybe<IDateTimeNullableFilter>;
   deletedAt?: Maybe<IDateTimeNullableFilter>;
-  role?: Maybe<IEnumRoleFilter>;
+  role?: Maybe<IEnumRoleNullableFilter>;
 };
 
 export type IUserUpdateManyMutationInput = {
   id?: Maybe<IStringFieldUpdateOperationsInput>;
   email?: Maybe<IStringFieldUpdateOperationsInput>;
-  name?: Maybe<INullableStringFieldUpdateOperationsInput>;
+  name?: Maybe<IStringFieldUpdateOperationsInput>;
   password?: Maybe<IStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   deletedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
-  role?: Maybe<IEnumRoleFieldUpdateOperationsInput>;
+  role?: Maybe<INullableEnumRoleFieldUpdateOperationsInput>;
 };
 
 export type IUserUpsertWithWhereUniqueWithoutProjectsInput = {
@@ -1688,10 +1789,62 @@ export type IProjectUpdateManyWithWhereWithoutProjectOwnerInput = {
   data: IProjectUpdateManyMutationInput;
 };
 
+export type IProjectScalarWhereInput = {
+  AND?: Maybe<Array<IProjectScalarWhereInput>>;
+  OR?: Maybe<Array<IProjectScalarWhereInput>>;
+  NOT?: Maybe<Array<IProjectScalarWhereInput>>;
+  id?: Maybe<IStringFilter>;
+  name?: Maybe<IStringFilter>;
+  createdAt?: Maybe<IDateTimeNullableFilter>;
+  updatedAt?: Maybe<IDateTimeNullableFilter>;
+  deletedAt?: Maybe<IDateTimeNullableFilter>;
+  userId?: Maybe<IStringFilter>;
+};
+
+export type IProjectUpdateManyMutationInput = {
+  id?: Maybe<IStringFieldUpdateOperationsInput>;
+  name?: Maybe<IStringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
+  deletedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
+};
+
 export type IProjectUpsertWithWhereUniqueWithoutProjectOwnerInput = {
   where: IProjectWhereUniqueInput;
   update: IProjectUpdateWithoutProjectOwnerInput;
   create: IProjectCreateWithoutProjectOwnerInput;
+};
+
+export type IUserUpsertWithoutAssignTasksInput = {
+  update: IUserUpdateWithoutAssignTasksInput;
+  create: IUserCreateWithoutAssignTasksInput;
+};
+
+export type ITaskUpdateManyWithWhereWithoutUserInput = {
+  where: ITaskScalarWhereInput;
+  data: ITaskUpdateManyMutationInput;
+};
+
+export type ITaskUpsertWithWhereUniqueWithoutUserInput = {
+  where: ITaskWhereUniqueInput;
+  update: ITaskUpdateWithoutUserInput;
+  create: ITaskCreateWithoutUserInput;
+};
+
+export type IUserUpsertWithoutProjectOwnsInput = {
+  update: IUserUpdateWithoutProjectOwnsInput;
+  create: IUserCreateWithoutProjectOwnsInput;
+};
+
+export type IProjectUpdateManyWithWhereWithoutAssignUsersInput = {
+  where: IProjectScalarWhereInput;
+  data: IProjectUpdateManyMutationInput;
+};
+
+export type IProjectUpsertWithWhereUniqueWithoutAssignUsersInput = {
+  where: IProjectWhereUniqueInput;
+  update: IProjectUpdateWithoutAssignUsersInput;
+  create: IProjectCreateWithoutAssignUsersInput;
 };
 
 export type IUserUpsertWithoutTasksInput = {
@@ -1737,38 +1890,41 @@ export type IProjectUpdateInput = {
 
 export type ITaskCreateInput = {
   id?: Maybe<Scalars['String']>;
-  name: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
   content?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   deletedAt?: Maybe<Scalars['DateTime']>;
   archiveAt?: Maybe<Scalars['DateTime']>;
-  user: IUserCreateOneWithoutTasksInput;
+  user?: Maybe<IUserCreateOneWithoutTasksInput>;
   labels?: Maybe<ILabelCreateManyWithoutTasksInput>;
+  assignUser?: Maybe<IUserCreateOneWithoutAssignTasksInput>;
 };
 
 export type ITaskUpdateInput = {
   id?: Maybe<IStringFieldUpdateOperationsInput>;
-  name?: Maybe<IStringFieldUpdateOperationsInput>;
+  name?: Maybe<INullableStringFieldUpdateOperationsInput>;
   content?: Maybe<INullableStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   deletedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   archiveAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
-  user?: Maybe<IUserUpdateOneRequiredWithoutTasksInput>;
+  user?: Maybe<IUserUpdateOneWithoutTasksInput>;
   labels?: Maybe<ILabelUpdateManyWithoutTasksInput>;
+  assignUser?: Maybe<IUserUpdateOneWithoutAssignTasksInput>;
 };
 
 export type IUserCreateInput = {
   id?: Maybe<Scalars['String']>;
   email: Scalars['String'];
-  name?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
   password: Scalars['String'];
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   deletedAt?: Maybe<Scalars['DateTime']>;
   role?: Maybe<IRole>;
   tasks?: Maybe<ITaskCreateManyWithoutUserInput>;
+  assignTasks?: Maybe<ITaskCreateManyWithoutAssignUserInput>;
   workspaces?: Maybe<IWorkspaceCreateManyWithoutUserInput>;
   projects?: Maybe<IProjectCreateManyWithoutAssignUsersInput>;
   projectOwns?: Maybe<IProjectCreateManyWithoutProjectOwnerInput>;
@@ -1777,13 +1933,14 @@ export type IUserCreateInput = {
 export type IUserUpdateInput = {
   id?: Maybe<IStringFieldUpdateOperationsInput>;
   email?: Maybe<IStringFieldUpdateOperationsInput>;
-  name?: Maybe<INullableStringFieldUpdateOperationsInput>;
+  name?: Maybe<IStringFieldUpdateOperationsInput>;
   password?: Maybe<IStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   deletedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
-  role?: Maybe<IEnumRoleFieldUpdateOperationsInput>;
+  role?: Maybe<INullableEnumRoleFieldUpdateOperationsInput>;
   tasks?: Maybe<ITaskUpdateManyWithoutUserInput>;
+  assignTasks?: Maybe<ITaskUpdateManyWithoutAssignUserInput>;
   workspaces?: Maybe<IWorkspaceUpdateManyWithoutUserInput>;
   projects?: Maybe<IProjectUpdateManyWithoutAssignUsersInput>;
   projectOwns?: Maybe<IProjectUpdateManyWithoutProjectOwnerInput>;
@@ -1810,13 +1967,14 @@ export type IUserCreateOneWithoutWorkspacesInput = {
 export type IUserCreateWithoutWorkspacesInput = {
   id?: Maybe<Scalars['String']>;
   email: Scalars['String'];
-  name?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
   password: Scalars['String'];
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   deletedAt?: Maybe<Scalars['DateTime']>;
   role?: Maybe<IRole>;
   tasks?: Maybe<ITaskCreateManyWithoutUserInput>;
+  assignTasks?: Maybe<ITaskCreateManyWithoutAssignUserInput>;
   projects?: Maybe<IProjectCreateManyWithoutAssignUsersInput>;
   projectOwns?: Maybe<IProjectCreateManyWithoutProjectOwnerInput>;
 };
@@ -1849,13 +2007,14 @@ export type IUserUpdateOneRequiredWithoutWorkspacesInput = {
 export type IUserUpdateWithoutWorkspacesInput = {
   id?: Maybe<IStringFieldUpdateOperationsInput>;
   email?: Maybe<IStringFieldUpdateOperationsInput>;
-  name?: Maybe<INullableStringFieldUpdateOperationsInput>;
+  name?: Maybe<IStringFieldUpdateOperationsInput>;
   password?: Maybe<IStringFieldUpdateOperationsInput>;
   createdAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
   deletedAt?: Maybe<INullableDateTimeFieldUpdateOperationsInput>;
-  role?: Maybe<IEnumRoleFieldUpdateOperationsInput>;
+  role?: Maybe<INullableEnumRoleFieldUpdateOperationsInput>;
   tasks?: Maybe<ITaskUpdateManyWithoutUserInput>;
+  assignTasks?: Maybe<ITaskUpdateManyWithoutAssignUserInput>;
   projects?: Maybe<IProjectUpdateManyWithoutAssignUsersInput>;
   projectOwns?: Maybe<IProjectUpdateManyWithoutProjectOwnerInput>;
 };
@@ -1892,10 +2051,10 @@ export type ICreateTaskMutation = (
     & { labels?: Maybe<Array<(
       { __typename?: 'Label' }
       & Pick<ILabel, 'id' | 'name' | 'createdAt'>
-    )>>, user: (
+    )>>, user?: Maybe<(
       { __typename?: 'User' }
       & Pick<IUser, 'id' | 'email' | 'name' | 'password' | 'createdAt' | 'role'>
-    ) }
+    )> }
   ) }
 );
 
@@ -1941,10 +2100,13 @@ export type ITaskDetailQuery = (
     & { labels?: Maybe<Array<(
       { __typename?: 'Label' }
       & Pick<ILabel, 'id'>
-    )>>, user: (
+    )>>, user?: Maybe<(
       { __typename?: 'User' }
       & Pick<IUser, 'name'>
-    ) }
+    )>, assignUser?: Maybe<(
+      { __typename?: 'User' }
+      & Pick<IUser, 'id' | 'name' | 'email' | 'password'>
+    )> }
   )> }
 );
 
@@ -1962,10 +2124,10 @@ export type ITaskFeedQuery = (
     & { labels?: Maybe<Array<(
       { __typename?: 'Label' }
       & Pick<ILabel, 'id' | 'name' | 'createdAt'>
-    )>>, user: (
+    )>>, user?: Maybe<(
       { __typename?: 'User' }
       & Pick<IUser, 'id' | 'email' | 'name' | 'password' | 'createdAt' | 'role'>
-    ) }
+    )> }
   )> }
 );
 
@@ -1980,6 +2142,24 @@ export type IUpdateTaskMutation = (
   & { updateTask?: Maybe<(
     { __typename?: 'Task' }
     & Pick<ITask, 'id' | 'name' | 'content' | 'createdAt'>
+  )> }
+);
+
+export type IUpdateTaskAssignUserMutationVariables = Exact<{
+  updateTask: ITaskUpdateInput;
+  taskWhereInput: ITaskWhereUniqueInput;
+}>;
+
+
+export type IUpdateTaskAssignUserMutation = (
+  { __typename?: 'Mutation' }
+  & { updateTask?: Maybe<(
+    { __typename?: 'Task' }
+    & Pick<ITask, 'id' | 'name'>
+    & { assignUser?: Maybe<(
+      { __typename?: 'User' }
+      & Pick<IUser, 'id' | 'name' | 'email' | 'password'>
+    )> }
   )> }
 );
 
@@ -1998,6 +2178,17 @@ export type IUpdateTaskLabelMutation = (
       { __typename?: 'Label' }
       & Pick<ILabel, 'id' | 'name'>
     )>> }
+  )> }
+);
+
+export type IUserFeedQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type IUserFeedQuery = (
+  { __typename?: 'Query' }
+  & { users: Array<(
+    { __typename?: 'User' }
+    & Pick<IUser, 'id' | 'name' | 'email' | 'password'>
   )> }
 );
 
@@ -2137,6 +2328,12 @@ export const TaskDetailDocument = gql`
     user {
       name
     }
+    assignUser {
+      id
+      name
+      email
+      password
+    }
     createdAt
   }
 }
@@ -2261,6 +2458,46 @@ export function useUpdateTaskMutation(baseOptions?: Apollo.MutationHookOptions<I
 export type UpdateTaskMutationHookResult = ReturnType<typeof useUpdateTaskMutation>;
 export type UpdateTaskMutationResult = Apollo.MutationResult<IUpdateTaskMutation>;
 export type UpdateTaskMutationOptions = Apollo.BaseMutationOptions<IUpdateTaskMutation, IUpdateTaskMutationVariables>;
+export const UpdateTaskAssignUserDocument = gql`
+    mutation UpdateTaskAssignUser($updateTask: TaskUpdateInput!, $taskWhereInput: TaskWhereUniqueInput!) {
+  updateTask(data: $updateTask, where: $taskWhereInput) {
+    id
+    name
+    assignUser {
+      id
+      name
+      email
+      password
+    }
+  }
+}
+    `;
+export type IUpdateTaskAssignUserMutationFn = Apollo.MutationFunction<IUpdateTaskAssignUserMutation, IUpdateTaskAssignUserMutationVariables>;
+
+/**
+ * __useUpdateTaskAssignUserMutation__
+ *
+ * To run a mutation, you first call `useUpdateTaskAssignUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateTaskAssignUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateTaskAssignUserMutation, { data, loading, error }] = useUpdateTaskAssignUserMutation({
+ *   variables: {
+ *      updateTask: // value for 'updateTask'
+ *      taskWhereInput: // value for 'taskWhereInput'
+ *   },
+ * });
+ */
+export function useUpdateTaskAssignUserMutation(baseOptions?: Apollo.MutationHookOptions<IUpdateTaskAssignUserMutation, IUpdateTaskAssignUserMutationVariables>) {
+        return Apollo.useMutation<IUpdateTaskAssignUserMutation, IUpdateTaskAssignUserMutationVariables>(UpdateTaskAssignUserDocument, baseOptions);
+      }
+export type UpdateTaskAssignUserMutationHookResult = ReturnType<typeof useUpdateTaskAssignUserMutation>;
+export type UpdateTaskAssignUserMutationResult = Apollo.MutationResult<IUpdateTaskAssignUserMutation>;
+export type UpdateTaskAssignUserMutationOptions = Apollo.BaseMutationOptions<IUpdateTaskAssignUserMutation, IUpdateTaskAssignUserMutationVariables>;
 export const UpdateTaskLabelDocument = gql`
     mutation UpdateTaskLabel($updateTask: TaskUpdateInput!, $taskWhereInput: TaskWhereUniqueInput!) {
   updateTask(data: $updateTask, where: $taskWhereInput) {
@@ -2299,3 +2536,41 @@ export function useUpdateTaskLabelMutation(baseOptions?: Apollo.MutationHookOpti
 export type UpdateTaskLabelMutationHookResult = ReturnType<typeof useUpdateTaskLabelMutation>;
 export type UpdateTaskLabelMutationResult = Apollo.MutationResult<IUpdateTaskLabelMutation>;
 export type UpdateTaskLabelMutationOptions = Apollo.BaseMutationOptions<IUpdateTaskLabelMutation, IUpdateTaskLabelMutationVariables>;
+export const UserFeedDocument = gql`
+    query UserFeed {
+  users {
+    id
+    name
+    email
+    password
+  }
+}
+    `;
+
+/**
+ * __useUserFeedQuery__
+ *
+ * To run a query within a React component, call `useUserFeedQuery` and pass it any options that fit your needs.
+ * When your component renders, `useUserFeedQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useUserFeedQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useUserFeedQuery(baseOptions?: Apollo.QueryHookOptions<IUserFeedQuery, IUserFeedQueryVariables>) {
+        return Apollo.useQuery<IUserFeedQuery, IUserFeedQueryVariables>(UserFeedDocument, baseOptions);
+      }
+export function useUserFeedLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IUserFeedQuery, IUserFeedQueryVariables>) {
+          return Apollo.useLazyQuery<IUserFeedQuery, IUserFeedQueryVariables>(UserFeedDocument, baseOptions);
+        }
+export type UserFeedQueryHookResult = ReturnType<typeof useUserFeedQuery>;
+export type UserFeedLazyQueryHookResult = ReturnType<typeof useUserFeedLazyQuery>;
+export type UserFeedQueryResult = Apollo.QueryResult<IUserFeedQuery, IUserFeedQueryVariables>;
+export function refetchUserFeedQuery(variables?: IUserFeedQueryVariables) {
+      return { query: UserFeedDocument, variables: variables }
+    }
